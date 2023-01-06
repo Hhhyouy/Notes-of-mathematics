@@ -1,0 +1,211 @@
+\documentclass[UTF8]{ctexart}
+\usepackage{geometry}
+\usepackage{amsmath,mathtools,mathdots,extarrows,psfrag,lipsum,array}
+\usepackage{xcolor}
+\usepackage{tikz,pgfplots,tcolorbox,graphicx}
+\usepackage{caption,subcaption}
+\usepackage{amssymb}
+\usepackage{booktabs}
+\usepackage{bm}
+\usepackage{enumitem}
+\usepackage{pdfpages}
+%封面样式
+\usepackage{multicol,multirow}
+%符合国标gbt7714的引用范式
+\usepackage{gbt7714}
+%目录的链接
+\usepackage[hidelinks]{hyperref}
+%cc协议的图案
+\usepackage[scale=1]{ccicons}
+%脚注的圆圈序号
+\usepackage{pifont}
+%常用的图案，用于区分定理、例题结束的标记
+\usepackage{typicons}
+
+%宏包{breqn}和tikz包{tikzmark}相互冲突，使用前者后会在后者的命令下反复报错'pgf cannot find shape a'之类。
+%%%%%%%%%%%%%%new command environment%%%%%%%%%%%%
+\newcommand{\onech}[4]{
+\makebox[92pt][l]{(A) #1} \hfill
+\makebox[92pt][l]{(B) #2} \hfill
+\makebox[92pt][l]{(C) #3} \hfill
+\makebox[92pt][l]{(D) #4}\\}
+
+\allowdisplaybreaks
+
+\newcommand*\enumlabel[1]{
+    \tikz[baseline=(char.base)]{\node[shape=rectangle,inner sep=2pt,fill=Blue] (char) {{\textcolor{white}{#1}}};
+    }
+}
+
+\newcommand*\enulabel[1]{
+    \tikz[baseline=(char.base)]{\node[shape=rectangle,inner sep=2pt] (char) {{\textcolor{Blue}{#1}}};
+    }
+}
+
+\newcommand*\zheng{
+    \tikz[baseline=(char.base)]{\node[shape=rectangle,inner sep=0pt] (char) {{\bfseries\heiti\textcolor{Light_Yellow}{证明:\quad}}};
+    }
+}
+
+\newcommand*\jie{
+    \tikz[baseline=(char.base)]{\node[shape=rectangle,inner sep=0pt] (char) {{\bfseries\heiti\textcolor{Blue}{解:\quad}}};
+    }
+}
+
+\newenvironment{Quotation}[1]
+    {\newcommand\quotesource{#1}
+    \begin{quotation}}
+    {\par\hfill\sffamily\bfseries\setlength\leftskip{2em} ——\quotesource
+    \end{quotation}}
+
+%%%%%%%%%%%%%%%%%%graphic settings%%%%%%%%%%%%%%%%
+\tcbuselibrary{external,breakable,skins}
+\usetikzlibrary{decorations.pathreplacing,positioning,shapes.misc,decorations.markings,calc,intersections,arrows.meta,graphs,shapes.misc,decorations.pathmorphing,decorations.shapes,tikzmark,angles,quotes,patterns}
+\bibliographystyle{gbt7714-numerical}
+\geometry{a4paper,centering,scale=0.8,left=2cm,right=2cm,bottom=2cm,top=2.5cm}
+
+%脚注设置
+\renewcommand\thefootnote{\ding{\numexpr171+\value{footnote}}}
+
+%目录链接设置
+\hypersetup{
+    colorlinks=false,
+    citecolor=black,
+    filecolor=black,
+    urlcolor=black
+}
+
+\tikzset{every picture/.style={>=Latex}}
+%%%%%%%%%%%%%%%%%%%fonts settings%%%%%%%%%%%%%%%%%
+\setmainfont{Times New Roman}
+\setsansfont{Georgia}
+\setmonofont{Arial}
+
+%%%%%%%%%%%%%%%%%%chapter settings%%%%%%%%%%%%%%%%
+\ctexset{
+    section={
+    format+=\sectionFormat,
+    titleformat=\tcblower,
+    aftertitle=\end{tcolorbox}
+    },
+    subsection={
+    format+=\sectionFormatt,
+    titleformat=\tcblower,
+    aftertitle=\end{tcolorbox}
+    },
+    subsubsection={
+    format+=\sectionFormattt,
+    titleformat=\tcblower,
+    aftertitle=\end{tcolorbox}    
+    }
+    }
+\newcommand\sectionFormat[1]{
+\begin{tcolorbox}[colback=Cream_4!10,
+    colframe=white,leftrule=0mm,sharp corners,toprule=0mm,bottomrule=0mm,rightrule=0mm,sidebyside,lefthand ratio=0.1,colupper=Blue,collower=Blue,fontupper=\LARGE,fontlower=\LARGE,lower separated=false]
+#1
+}
+\newcommand\sectionFormatt[1]{
+\begin{tcolorbox}[colback=white,
+    colframe=white,leftrule=0mm,sharp corners,toprule=0mm,bottomrule=0mm,rightrule=0mm,sidebyside,lefthand ratio=0.05,colupper=Blue,collower=Blue,fontupper=\Large,fontlower=\Large,lower separated=false,size=minimal,beforeafter skip=1em]
+#1
+}
+\newcommand\sectionFormattt[1]{
+\begin{tcolorbox}[colback=white,
+    colframe=white,sharp corners,leftrule=0mm,toprule=0mm,bottomrule=0mm,rightrule=0mm,sidebyside,lefthand ratio=0.05,colupper=Blue,collower=Blue,fontupper=\large,fontlower=\large,lower separated=false,size=minimal,beforeafter skip=1em]
+#1
+}
+%%%%%%%%%%%%%%%%%tcolorbox settings%%%%%%%%%%%%%%%
+%备注：1.每定义一个新的\newtcolorbox都可以在使用环境的时候输入若干个参数。如果参数是在\begin……\end{}中用中括号[]加入的话，在定义的时候{name}[nums]后要加入一个空白的中括号，表示接受来自引用时的参数，如\newtcolorbox{pr}[1][]，第一个中括号内表示参数的个数。如果使用环境时的参数不是以中括号[]而是以大括号{}加入的话，定义环境时就不要放入中括号，直接在用#1表示参数即可。使用中括号传递参数的好处是，如果使用环境时不一定传递该参数，将默认该参数为空。但是用大括号使用环境时必须使用{}传递参数，否则将默认环境内容的第一个字符为该参数，造成不必要的混淆。当传递两个参数时，大括号{}传递一个具体的参数值，而中括号[]传递一个参数设置，定义环境时先定义中括号[]的内容，即#1，使用环境时中括号放在前面。2.在如下定义的prf环境中，框线是根据 title box 的定位去画的，所以在使用prf环境的时候，可以不传递参数，也就是标题，但会导致框线不显示，因为没有 title box。3.enhanced选项很重要，很多功能的实现需要依靠它。
+
+\newtcolorbox{prf}[1][]{fonttitle=\bfseries\heiti,colback=white,coltitle=white,breakable,enhanced,attach boxed title to top left={xshift=10mm},sharp corners,title={证明},after title={#1},size=fbox,after upper=\hfill$\blacksquare $,frame hidden,boxed title style={colback=Vintage_3,colframe=Vintage_3,sharp corners},
+overlay unbroken={
+    \draw[Vintage_3,line width=0.5mm] (title.west) -- ([yshift=\tcboxedtitleheight/2]frame.north west) -- (frame.south west) -- (frame.south east);},
+overlay first={
+    \draw[Vintage_3,line width=0.5mm] (title.west) -- ([yshift=\tcboxedtitleheight/2]frame.north west) -- (frame.south west);},
+overlay middle={
+    \draw[Vintage_3,line width=0.5mm] (frame.north west)--(frame.south west);},
+overlay last={
+    \draw[Vintage_3,line width=0.5mm] (frame.north west)--(frame.south west)--(frame.south east);}
+}
+
+\newtcolorbox{theorem}[1][]{fonttitle=\bfseries\heiti,colback=white,frame hidden,breakable,title=#1,enhanced,attach boxed title to top left={xshift=10mm},sharp corners,
+boxed title style={coltitle=white,colback=Blue,colframe=Blue,sharp corners},
+overlay unbroken={
+    \draw[Blue,line width=0.5mm] (title.west) -- ([yshift=\tcboxedtitleheight/2]frame.north west) -- (frame.south west) -- (frame.south east);},
+overlay first={
+    \draw[Blue,line width=0.5mm] (title.west) -- ([yshift=\tcboxedtitleheight/2]frame.north west) -- (frame.south west);},
+overlay middle={
+    \draw[Blue,line width=0.5mm] (frame.north west)--(frame.south west);},
+overlay last={
+    \draw[Blue,line width=0.5mm] (frame.north west)--(frame.south west)--(frame.south east);}
+}
+
+\newtcolorbox[auto counter,number within=section]{definition}[1][]{enhanced,frame hidden,colback=white,coltitle=Blue,fonttitle=\bfseries,title={定义~\thetcbcounter},detach title,before upper={\tcbtitle\quad},after title={\quad#1},breakable,sharp corners,borderline west={1mm}{0mm}{Cream_3}}
+
+\newtcolorbox{case}{enhanced,colframe=Lake_Blue!10,colback=Lake_Blue!10,sharp corners,breakable,borderline west={1mm}{0mm}{Lake_Blue}}
+
+\newtcolorbox[auto counter,number within=section]{liti}[1][]{colback=white,coltitle=Blue,frame hidden,breakable,before skip=1cm,title=错题回顾 \thetcbcounter,enhanced,attach boxed title to top left,sharp corners,fonttitle=\LARGE\heiti,
+boxed title style={empty,colframe=Blue,size=minimal,overlay={\draw[Blue,line width=2pt]([yshift=2pt]frame.north west)--([yshift=2pt]frame.north east);}},
+overlay unbroken={
+    \draw[Blue,line width=1pt] ([yshift=2pt]title.north west) -- ([yshift=\tcboxedtitleheight+2pt]frame.north east);
+    \draw[Blue,line width=1pt] (frame.south west)--(frame.south east);},
+overlay first={
+    \draw[Blue,line width=1pt] ([yshift=2pt]title.north west) -- ([yshift=\tcboxedtitleheight+2pt]frame.north east);},
+overlay last={
+    \draw[Blue,line width=1pt] (frame.south west)--(frame.south east);}
+}
+
+\newtcbox{\txe}{on line,arc=1pt,colback=Blue!10,colframe=white,colupper=Blue,boxrule=0pt,boxsep=0pt,left=5pt,right=3pt,top=2pt,bottom=2pt}
+
+\newtcolorbox[auto counter]{examp}[1][]{enhanced,frame hidden,colback=white,coltitle=Blue,fonttitle=\bfseries,title={例~\thetcbcounter},detach title,before upper={\tcbtitle},after title={\quad#1},breakable,sharp corners,size=minimal,
+overlay unbroken={
+    \node [yshift=0.5em] at (frame.south east) {\Large\color{Blue}\tiPinOutline};},
+overlay last={
+    \node [yshift=0.5em] at (frame.south east) {\Large\color{Blue}\tiPinOutline};}}
+
+\newtcolorbox[auto counter]{ttheorem}[1][]{enhanced,frame hidden,colback=white,coltitle=Blue,title={\bfseries 定理~\thetcbcounter},detach title,before upper={\tcbtitle},after title={\heiti#1\quad},breakable,sharp corners,beforeafter skip=0.5em,size=minimal,
+overlay unbroken={
+    \node [yshift=0.5em] at (frame.south east) {\Large\color{Blue}\tiLightbulb};},
+overlay last={
+    \node [yshift=0.5em] at (frame.south east) {\Large\color{Blue}\tiLightbulb};}}
+
+%%%%%%%%%%%%%%%%%%Color Definition%%%%%%%%%%%%%%%%
+\definecolor{Light_Yellow}{HTML}{CF7F19}
+\definecolor{Light_Green}{HTML}{007C63}
+\definecolor{Lake_Blue}{HTML}{7192C5}
+\definecolor{Blue}{HTML}{2e9ce9}
+%Nature
+\definecolor{Nature_1}{HTML}{F4FCD9}
+\definecolor{Nature_2}{HTML}{C5D8A4}
+\definecolor{Nature_3}{HTML}{BB9981}
+\definecolor{Nature_4}{HTML}{534340}
+%Vintage
+\definecolor{Vintage_1}{HTML}{E5E3C9}
+\definecolor{Vintage_2}{HTML}{B4CFB0}
+\definecolor{Vintage_3}{HTML}{94B49F}
+\definecolor{Vintage_4}{HTML}{789395}
+%Cream
+\definecolor{Cream_1}{HTML}{F7FBFC}
+\definecolor{Cream_2}{HTML}{D6E6F2}
+\definecolor{Cream_3}{HTML}{B9D7EA}
+\definecolor{Cream_4}{HTML}{769FCD}
+
+\title{Notes for Mathematics$^{\, \ccbync}$}
+\author{可达可达}
+\date{}
+
+\begin{document}
+\includepdf{123.pdf} 
+\newpage
+\maketitle
+\tableofcontents
+
+\zihao{-4}
+\include{preface}
+\include{analysis}
+\include{algebra}
+\include{probility}
+
+\end{document}
+
+

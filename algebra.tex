@@ -1,0 +1,1593 @@
+\section{线性代数}
+\subsection{行列式}
+\begin{definition}[逆序数]
+    对于$n$级排列$p_1p_2\dots p_n$中任意取定的两个数$p_k,p_s$,若$p_k>p_s$且$p_k$在$p_s$前面,则称$p_k$与$p_s$形成一个逆序,一个排列中所有逆序的个数成为该排列的逆序数,记为$\tau (p_1p_2\dots p_n)$.
+\end{definition}
+\begin{definition}[$n$阶行列式]
+    $n^2$个数排列成
+    \begin{equation*}
+        D=\left\lvert a_{ij}\right\rvert= 
+        \begin{vmatrix}
+        a_{11}   &   \dots   &   a_{1n}   \\
+        \vdots   &   \ddots   &   \vdots   \\
+        a_{n1}   &   \dots   &   a_{nn}   \\
+        \end{vmatrix}
+    \end{equation*}
+    称为$n$阶行列式,其值为$\displaystyle D=\sum_{p_1\dots p_n} (-1)^{\tau (p_1p_2\dots p_n)}a_{1p_1}a_{2p_2}\dots a_{np_n}$.也称此式为$D$的展开式.其中$p_1p_2\dots p_n$为$1,2,\dots,n$的某个排列,$\displaystyle \sum_{p_1\dots p_n}$表示对所有排列求和.
+
+    其值也等于$\displaystyle D=\sum_{p_1\dots p_n} (-1)^{\tau (p_1p_2\dots p_n)}a_{p_11}a_{p_22}\dots a_{p_nn}$.
+\end{definition}
+副对角型行列式
+$D=
+\begin{vmatrix}
+    0   &   \dots   &   0   &   a_1   \\
+    0   &   \dots   &   a_2   &   0   \\
+    \vdots   &   \iddots   &   \vdots   &   \vdots   \\
+    a_n   &   \dots   &   0   &   0   \\
+    \end{vmatrix}$
+的结果为$(-1)^{\frac{n(n-1)}{2}}a_1a_2\dots a_n$.
+
+范德蒙德行列式
+\begin{equation*}
+    \begin{vmatrix}
+    1   &   1   &   1   &   \dots   &   1   \\
+    x_1   &   x_2   &   x_3   &   \dots   &   x_n   \\
+    x_1^2   &   x_2^2   &   x_3^2   &   \dots   &   x_n^2   \\
+    \vdots   &   \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+    x_1^{n-1}   &   x_2^{n-1}   &   x_3^{n-1}   &   \dots   &   x_n^{n-1}   \\
+    \end{vmatrix}
+    =\prod _{1 \leqslant j<i \leqslant n}(x_i-x_j).
+\end{equation*}
+
+行列式的性质：
+\begin{enumerate}
+    \item 若
+    \begin{equation*}
+        D=\begin{vmatrix}
+            a_{11}   &   \dots   &   a_{1n}   \\
+            \vdots   &   \ddots   &   \vdots   \\
+            a_{n1}   &   \dots   &   a_{nn}   \\
+        \end{vmatrix},
+        D^\mathrm{T}=\begin{vmatrix}
+            a_{11}   &   \dots   &   a_{n1}   \\
+            \vdots   &   \ddots   &   \vdots   \\
+            a_{1n}   &   \dots   &   a_{nn}   \\
+        \end{vmatrix},
+    \end{equation*}
+    称$D^\mathrm{T}$是$D$的转置,$D=D^\mathrm{T}$
+    \item 互换行列式的两行(列),其值变号
+    \item 行列式的两行(列)元素相同,则其值为$0$
+    \item 数$k$乘以行列式的某一行(列)等于数$k$乘上该行列式.
+    \begin{itemize}
+        \item 若行列式的某行(列)元素全部是0,则行列式的值为0
+        \item 若行列式的两行(列)元素对应成比例,则行列式的值为0
+        \item 若行列式的某一行(列)均为两数之和,则该行列式可以拆分成两个行列式之和.
+    \end{itemize}
+    \item 在行列式中,若把某行(列)的$k$倍加到另一行(列)上,则行列式的值保持不变.
+\end{enumerate}
+\begin{ttheorem}
+    $n$阶行列式$D$等于他的任一行（列）的各元素与其对应的代数余子式乘积之和,即
+    \begin{equation*}
+        D=a_{i1}A_{i1}+a_{i2}A_{i2}+\dots+a_{in}A_{in},(i=1,2,\dots,n).
+    \end{equation*}
+    或
+    \begin{equation*}
+        D=a_{1j}A_{1j}+a_{2j}A_{2j}+\dots+a_{nj}A_{nj},(j=1,2,\dots,n).
+    \end{equation*}
+\end{ttheorem}
+\begin{ttheorem}
+    $n$阶行列式$D$的任一行元素与另一行对应元素的代数余子式的乘积之和等于0,即
+    \begin{equation*}
+        a_{i1}A_{j1}+a_{i2}A_{j2}+\dots+a_{in}A_{jn}=0,(i\neq j).
+    \end{equation*}
+\end{ttheorem}
+故可得$\displaystyle \sum_{k=1}^{n} a_{ki}A_{kj}=\sum_{k=1}^{n} a_{ik}A_{jk}=D\delta _{ij}$,其中$\delta _{ij}=\begin{dcases}
+    1,i=j\\
+    0,i\neq j\\
+\end{dcases}$为克罗内克（Kronecker）系数.
+
+\begin{examp}{计算：$D=\begin{vmatrix}
+1+a_1   &   1   &   \dots   &   1   \\
+1   &   1+a_2   &   \dots   &   1   \\
+\vdots   &   \vdots   &   \ddots   &   \vdots   \\
+1   &   1   &   \dots   &   1+a_n   \\
+\end{vmatrix}$,这里$a_i\neq 0,i=1,2,\dots,n$.}
+    \par \jie 将除了主对角线以外的$1$看成$1+0$,这样行列式每列都由两个子列组成.$D=
+    \begin{vmatrix}
+        1+a_1   &   1+0   &   \dots   &   1+0   \\
+        1+0   &   1+a_2   &   \dots   &   1+0   \\
+        \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+        1+0   &   1+0   &   \dots   &   1+a_n   \\
+    \end{vmatrix}$
+    由此我们可以将这个行列式拆成$2^n$个行列式.拆的过程中有些行列式两列都为1,所以这部分行列式的值为0.
+    \begin{gather*}
+        D=
+        \begin{vmatrix}
+            1+a_1   &   1   &   \dots   &   1   \\
+            1   &   1+a_2   &   \dots   &   1   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            1   &   1   &   \dots   &   1+a_n   \\
+        \end{vmatrix}\\
+        =\begin{vmatrix}
+            1   &   1   &   \dots   &   1   \\
+            1   &   1+a_2   &   \dots   &   1   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            1   &   1   &   \dots   &   1+a_n   \\
+        \end{vmatrix}+
+        \begin{vmatrix}
+            a_1   &   1   &   \dots   &   1   \\
+            0   &   1+a_2   &   \dots   &   1   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            0   &   1   &   \dots   &   1+a_n   \\
+        \end{vmatrix}
+        =\begin{vmatrix}
+            1   &   1   &   \dots   &   1   \\
+            1   &   1   &   \dots   &   1   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            1   &   1   &   \dots   &   1+a_n   \\
+        \end{vmatrix}\\
+        +\begin{vmatrix}
+            1   &   0   &   \dots   &   1   \\
+            1   &   a_2   &   \dots   &   1   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            1   &   0   &   \dots   &   1+a_n   \\
+        \end{vmatrix}+
+        \begin{vmatrix}
+            a_1   &   1   &   \dots   &   1   \\
+            0   &   1   &   \dots   &   1   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            0   &   1   &   \dots   &   1+a_n   \\
+        \end{vmatrix}+
+        \begin{vmatrix}
+            a_1   &   0   &   \dots   &   1   \\
+            0   &   a_2   &   \dots   &   1   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            0   &   0   &   \dots   &   1+a_n   \\
+        \end{vmatrix}
+    \end{gather*}
+    第二次拆分行列式后我们可以得出一些规律,首先第一个行列式有两列相等元素,故值为0;第二、三个行列式都有一列元素全部为1,在下一次拆分时得到的两个行列式中一定会出现一个行列式两列都是1,所以只会剩下一个;第四个行列式有点类似于第一次拆分的情况,回到了未拆时的情况：下一次拆分会产生一列都是1,然后再拆一次出现当前的四个行列式.由次我们得到一个规律：第一次拆分产生不为零的行列式2个,第二次3个,第三次4个,第四次5个,\dots,第$n$次$n+1$个.故：
+    \begin{gather*}
+        D=\begin{vmatrix}
+            1   &   0   &   \dots   &   0   \\
+            1   &   a_2   &   \dots   &   0   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            1   &   0   &   \dots   &   a_n   \\
+        \end{vmatrix}+
+        \begin{vmatrix}
+            a_1   &   1   &   \dots   &   0   \\
+            0   &   1   &   \dots   &   0   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            0   &   1   &   \dots   &   a_n   \\
+        \end{vmatrix}+\dots+
+        \begin{vmatrix}
+            a_1   &   0   &   \dots   &   1   \\
+            0   &   a_2   &   \dots   &   1   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            0   &   0   &   \dots   &   1   \\
+        \end{vmatrix}\\
+        +\begin{vmatrix}
+            a_1   &   0   &   \dots   &   0   \\
+            0   &   a_2   &   \dots   &   0   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            0   &   0   &   \dots   &   a_n   \\
+        \end{vmatrix}=a_1a_2\dots a_n+a_2a_3\dots a_n+\dots+a_1a_2\dots a_{n-1}\\
+        =a_1a_2\dots a_n\cdot \left( 1+\sum_{i=1}^{n} \frac{1}{a_i} \right)
+    \end{gather*}
+    观察后可以发现元素都为1的列从第一列移动到最后一列,可以转换成三角形行列式得出结果.$
+        \begin{vmatrix}
+        a_1   &   1   &   \dots   &   0   \\
+        0   &   1   &   \dots   &   0   \\
+        \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+        0   &   1   &   \dots   &   a_n   \\
+        \end{vmatrix}\xrightarrow{\text{$c_1-c_2$}}
+        \begin{vmatrix}
+        a_1   &   0   &   \dots   &   0   \\
+        0   &   1   &   \dots   &   0   \\
+        \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+        0   &   1   &   \dots   &   a_n   \\
+        \end{vmatrix}=a_1\cdot 1\cdot a_3\dots a_n.$
+\end{examp}
+\begin{examp}{（爪形行列式处理方法）$D=
+    \begin{vmatrix}
+    1+x   &   1   &   1   &   1   \\
+    -x   &   -x   &   0   &   0   \\
+    -x   &   0   &   y   &   0   \\
+    -x   &   0   &   0   &   -y   \\
+    \end{vmatrix}$}
+    \par \jie 这种形状的行列式处理的方法是将后面的列加到第一列上,构造出一个上三角行列式.
+    \begin{gather*}
+        D=
+        \begin{vmatrix}
+        1+x   &   1   &   1   &   1   \\
+        -x   &   -x   &   0   &   0   \\
+        -x   &   0   &   y   &   0   \\
+        -x   &   0   &   0   &   -y   \\
+        \end{vmatrix}=
+        \begin{vmatrix}
+            x   &   1   &   1   &   1   \\
+            0   &   -x   &   0   &   0   \\
+            -x   &   0   &   y   &   0   \\
+            -x   &   0   &   0   &   -y   \\
+        \end{vmatrix}=
+        \begin{vmatrix}
+            x+\frac{x}{y}   &   1   &   1   &   1   \\
+            0   &   -x   &   0   &   0   \\
+            0   &   0   &   y   &   0   \\
+            -x   &   0   &   0   &   -y   \\
+        \end{vmatrix}\\
+        =\begin{vmatrix}
+            x   &   1   &   1   &   1   \\
+            0   &   -x   &   0   &   0   \\
+            0   &   0   &   y   &   0   \\
+            0   &   0   &   0   &   -y   \\
+        \end{vmatrix}=x^2y^2.
+    \end{gather*}
+\end{examp}
+\begin{examp}{（爪形行列式处理方法）
+    $\begin{vmatrix}
+\lambda   &   1   &   1   \\
+1   &   \lambda   &   1   \\
+1   &   1   &   \lambda   \\
+    \end{vmatrix}$}
+    
+    \jie 
+    \begin{gather*}
+        \begin{vmatrix}
+            \lambda   &   1   &   1   \\
+            1   &   \lambda   &   1   \\
+            1   &   1   &   \lambda   \\
+        \end{vmatrix}=
+        \begin{vmatrix}
+            \lambda+2   &   1   &   1   \\
+            \lambda+2   &   \lambda   &   1   \\
+            \lambda+2   &   1   &   \lambda   \\
+        \end{vmatrix}= 
+        \begin{vmatrix}
+            \lambda+2   &   1   &   1   \\
+            0   &   \lambda-1   &   0   \\
+            0   &   0   &   \lambda-1   \\
+        \end{vmatrix}=
+        (\lambda+2)(-1)^2(\lambda-1)^2
+    \end{gather*}
+\end{examp}
+\begin{examp}{解特征方程}
+
+    \jie 
+    \begin{gather*}
+        \vert \lambda \mathbf{I}-\mathbf{A} \vert=
+        \begin{vmatrix}
+            \lambda+2   &   1   &   -2\\
+            0   &   \lambda+1   &   -4\\
+            -1   &   0   &   \lambda-1\\
+        \end{vmatrix}=
+    \begin{vmatrix}
+        \lambda+2   &   1   &   0   \\
+    0   &   \lambda+1   &   2\lambda-2  \\
+    -1  &   0   &   \lambda-1   \\
+    \end{vmatrix} \\
+    =\begin{vmatrix}
+        \lambda+2   &   1   &   0   \\
+        2   &   \lambda+1   &   0   \\
+        -1  &   0   &   \lambda-1   \\    
+    \end{vmatrix}=(\lambda-1)(-1)^{3+3}(\lambda^2+3\lambda)=0
+    \end{gather*}
+\end{examp}
+
+\begin{examp}{解特征方程}
+
+    \jie 
+    \begin{gather*}
+        \vert \lambda \mathbf{I}-\mathbf{A} \vert=
+        \begin{vmatrix}
+            \lambda-17  &   2   &   2   \\
+            2   &   \lambda-14  &   4   \\
+            2   &   4   &   \lambda-14  \\        
+        \end{vmatrix}=
+    \begin{vmatrix}
+        \lambda-17  &   2   &   2   \\
+        2   &   \lambda-14  &   4   \\
+        0   &   18-\lambda  &   \lambda-18  \\    
+    \end{vmatrix} \\
+    =\begin{vmatrix}
+        \lambda-17  &   4   &   2   \\
+        2   &   \lambda-10  &   4   \\
+        0   &   0   &   \lambda-18  \\       
+    \end{vmatrix}=(\lambda-18)(-1)^{3+3}\left[(\lambda-17)(\lambda-10)-8\right] =0
+    \end{gather*}
+\end{examp}
+
+\begin{examp}{解特征方程}
+
+    \jie 
+    \begin{gather*}
+        \vert \lambda \mathbf{I}-\mathbf{A} \vert=
+        \begin{vmatrix}
+            \lambda+3  &   1   &   -2   \\
+            0   &   \lambda+1  &   -4   \\
+            1   &   0   &   \lambda-1  \\        
+        \end{vmatrix}=
+    \begin{vmatrix}
+        \lambda+3  &   1   &   0   \\
+        0   &   \lambda+1  &   2\lambda-2   \\
+        1   &   0  &   \lambda-1  \\    
+    \end{vmatrix} \\
+    =\begin{vmatrix}
+        \lambda+3  &   1   &   0   \\
+        -2   &   \lambda+1  &   0   \\
+        1   &   0   &   \lambda-1  \\       
+    \end{vmatrix}=(\lambda-1)(\lambda^2+4\lambda+5)=0
+    \end{gather*}
+\end{examp}
+
+\begin{examp}{解特征方程}
+
+    \jie 本题是含有参数的特征方程,和上述例题的不同在于,很难通过初等变换将某一行或者列化简为一个元素.这种情况下一般直接展开,对所得的式子进行化简.
+
+    法一：
+    \begin{gather*}
+        \vert \lambda \mathbf{I}-\mathbf{A} \vert=
+        \begin{vmatrix}
+            \lambda-a  &   0   &   -1   \\
+            0   &   \lambda-a  &   1   \\
+            -1   &   1   &   \lambda-(a-1)  \\        
+        \end{vmatrix}=
+        \begin{vmatrix}
+            \lambda-a  &   0   &   -1   \\
+            \lambda-a   &   \lambda-a  &   1   \\
+            0   &   1   &   \lambda-(a-1)  \\        
+        \end{vmatrix} \\
+        =\begin{vmatrix}
+            \lambda-a  &   0   &   -1   \\
+            0   &   \lambda-a  &   2   \\
+            0   &   1   &   \lambda-a+1  \\        
+        \end{vmatrix}=(\lambda-a)(-1)^2\left[ (\lambda-a)(\lambda-a+1)-2 \right] \\
+        =(\lambda-a)\left[ (\lambda-a)^2+(\lambda-a)-2 \right]=(\lambda-a)(\lambda-a-1)(\lambda-a+2)=0
+    \end{gather*}
+
+    法二：对第一列元素展开
+    \begin{gather*}
+        \vert \lambda \mathbf{I}-\mathbf{A} \vert=
+        \begin{vmatrix}
+            \lambda-a  &   0   &   -1   \\
+            0   &   \lambda-a  &   1   \\
+            -1   &   1   &   \lambda-(a-1)  \\        
+        \end{vmatrix}=
+        (\lambda-a)\left[ (\lambda-a)(\lambda-a+1)-1 \right]-(\lambda-a)\\
+        =(\lambda-a)\left[ (\lambda-a)^2+(\lambda-a)-2 \right]=(\lambda-a)(\lambda-a-1)(\lambda-a+2)=0
+    \end{gather*}
+    这边要注意不要对展开的某一项先化简,譬如将$\left[ (\lambda-a)(\lambda-a+1)-1 \right]$拆散开,而是把$\lambda-a$当作一个整体,否则非常难算.
+
+\end{examp}
+
+\begin{examp}{设$\alpha_1,\alpha_2,\alpha_3$是三维列向量,矩阵$\mathbf{A}=(\alpha_1,\alpha_2,\alpha_3),\mathbf{B}=(\alpha_3,2\alpha_1+\alpha_2,3\alpha_2),\left\lvert \mathbf{A}\right\rvert =2$,则行列式$\mathbf{B}=$}
+
+    \jie $\left\lvert \mathbf{B}\right\rvert =\left\lvert \alpha_3,2\alpha_1+\alpha_2,3\alpha_2\right\rvert =3\left\lvert \alpha_3,2\alpha_1+\alpha_2,\alpha_2\right\rvert $,接下来用行列式的性质,用第二行减去第三行,不要拆成$3\left\lvert \alpha_3,2\alpha_1,\alpha_2\right\rvert +3\left\lvert \alpha_3,+\alpha_2,\alpha_2\right\rvert $,这样处理不了后面的式子,故原式$=6\left\lvert \alpha_3,\alpha_1,\alpha_2\right\rvert =12$
+
+\end{examp}
+
+\begin{examp}{解特征方程}
+
+    \jie 第二行乘$-\lambda$加到第一行\begin{gather*}
+        \vert \lambda \mathbf{I}-\mathbf{A} \vert=
+        \begin{vmatrix}
+            \lambda  &   1   &   -4   \\
+            1   &   \lambda-3  &   1   \\
+            -4   &   1   &   \lambda  \\        
+        \end{vmatrix}=
+        \begin{vmatrix}
+            0  &   -\lambda^2+3\lambda+1   &   -\lambda-4   \\
+            1   &   \lambda-3  &   1   \\
+            0   &   4\lambda-11   &   \lambda+4  \\        
+        \end{vmatrix} \\
+        =(\lambda+4)(\lambda-2)(\lambda-5)=0
+    \end{gather*}
+
+\end{examp}
+
+\subsection{矩阵}
+矩阵$\mathbf{A}$如果行列不相同,那么称作$m\times n$型矩阵,如果行列相同,那么称作$n$阶方阵.矩阵$\mathbf{A} ,\mathbf{B} $如果行列分别相同,那么称$\mathbf{A} ,\mathbf{B} $为同型矩阵.一阶方阵$(a)$就是元素$a$.
+
+对称矩阵、反对称矩阵、三角形矩阵、对角矩阵、数量矩阵、单位矩阵等矩阵都是指的方阵.
+
+需要注意的是,任何型的矩阵都可以进行转置运算,但只有方阵才具有幂运算、行列式运算和逆运算.只有方阵才具有特征值、特征向量和矩阵的迹.只有方阵才有合同矩阵、相似矩阵.只有方阵才能进行对角化.
+\begin{gather*}
+    \mathbf{A} \mathbf{B} =\mathbf{O}\nRightarrow\mathbf{A} =\mathbf{O} \text{或} \mathbf{B} =\mathbf{O} \text{,即} \\
+    \mathbf{A} (\mathbf{B} -\mathbf{C})=\mathbf{O} \nRightarrow \mathbf{B} =\mathbf{C}\\
+    \mathbf{A}^k =\mathbf{O}\nRightarrow\mathbf{A} =\mathbf{O}
+\end{gather*}
+但是如果$\mathbf{A}$是可逆矩阵,那么
+\begin{equation*}
+    \mathbf{A} \mathbf{B} =\mathbf{O} \implies \mathbf{B} =\mathbf{A}^{-1} \mathbf{O}\implies \mathbf{B} =\mathbf{O}
+\end{equation*}
+\begin{definition}
+    若$\mathbf{A} \mathbf{B} =\mathbf{B} \mathbf{A} $,则$\mathbf{A} ,\mathbf{B} $为同阶矩阵（方阵）,称$\mathbf{A} ,\mathbf{B} $为可交换矩阵.
+\end{definition}
+\begin{ttheorem}
+    $n$阶数量矩阵$\mathbf{B} =\begin{pmatrix}
+    b   &      &      &      \\
+       &   b   &      &      \\
+       &      &   \ddots   &      \\
+       &      &      &   b   \\
+    \end{pmatrix}$与所有的方阵可交换.若$b=1$,则$\mathbf{I} \mathbf{A} =\mathbf{A} \mathbf{I} =\mathbf{A} .$显然$\mathbf{B} =b\mathbf{I} ,\mathbf{I}^{-1}=\mathbf{I}$.
+\end{ttheorem}
+\begin{ttheorem}
+    若$\mathbf{A} $为$m\times n$矩阵, $\mathbf{B} _m$和$\mathbf{B} _n$分别为$m$阶和$n$阶数量矩阵,$\mathbf{I} _m$和$\mathbf{I} _n$分别为$m$阶和$n$阶单位矩阵,则：
+    \begin{equation*}
+        \mathbf{B} _m\mathbf{A} =\mathbf{A}\mathbf{B} _n =b\mathbf{A} ,\mathbf{I} _m\mathbf{A} =\mathbf{A} \mathbf{I} _n=\mathbf{A} 
+    \end{equation*}
+\end{ttheorem}
+\begin{ttheorem}
+    $\mathbf{A}$和$\mathbf{B}$可交换的充要条件是$(\mathbf{A}+\mathbf{B})^2=\mathbf{A}^2+2\mathbf{A}\mathbf{B}+\mathbf{B}^2.$
+\end{ttheorem}
+若$\mathbf{A}$是$n$阶方阵,方阵的行列式运算规则
+\begin{enumerate}
+    \item $\left\lvert \mathbf{A} \mathbf{B} \right\rvert =\left\lvert \mathbf{A} \right\rvert \cdot\left\lvert \mathbf{B} \right\rvert \\
+    \implies \left\lvert \mathbf{A} _1\mathbf{A} _2\dots \mathbf{A} _n\right\rvert =\left\lvert \mathbf{A} _1 \right\rvert \cdot \left\lvert \mathbf{A} _2 \right\rvert \dots \left\lvert \mathbf{A} _n \right\rvert $ 其中$\left\lvert \mathbf{A} _1 \right\rvert , \left\lvert \mathbf{A} _2 \right\rvert ,\dots ,\left\lvert \mathbf{A} _n \right\rvert $是同阶方阵.
+    \item $\left\lvert \mathbf{A}^k \right\rvert =\left\lvert \mathbf{A} \right\rvert^k$,$k$为正整数.
+    \item $\left\lvert \lambda \mathbf{A} \right\rvert =\lambda^n\left\lvert \mathbf{A} \right\rvert$
+    \item {\color{Blue}$\left\lvert \mathbf{A}^{-1} \right\rvert =\frac{1}{\left\lvert \mathbf{A} \right\rvert}$}
+    \item \begin{equation*}
+        \mathbf{A} =\begin{pmatrix}
+        a_{11}   &      &      &      \\
+           &   a_{22}   &      &      \\
+           &      &   \ddots   &      \\
+           &      &      &   a_{nn}   \\
+        \end{pmatrix},
+        \mathbf{B}=\begin{pmatrix}
+            b_{11}   &      &      &      \\
+               &   b_{22}   &      &      \\
+               &      &   \ddots   &      \\
+               &      &      &   b_{nn}   \\
+            \end{pmatrix},
+        \mathbf{A}\mathbf{B}=\begin{pmatrix}
+            a_{11}b_{11}   &      &      &      \\
+               &   a_{22}b_{22}   &      &      \\
+               &      &   \ddots   &      \\
+               &      &      &   a_{nn}b_{nn}   \\
+            \end{pmatrix}
+    \end{equation*}
+    \item 对角矩阵的幂运算:
+    \begin{equation*}
+        \mathbf{A} =\begin{pmatrix}
+        a_{11}   &      &      &      \\
+           &   a_{22}   &      &      \\
+           &      &   \ddots   &      \\
+           &      &      &   a_{nn}   \\
+        \end{pmatrix},
+        \mathbf{A}^n=\begin{pmatrix}
+            a_{11}^n   &      &      &      \\
+               &   a_{22}^n   &      &      \\
+               &      &   \ddots   &      \\
+               &      &      &   a_{nn}^n   \\
+            \end{pmatrix}
+    \end{equation*}
+    \item 若矩阵$\mathbf{A}$的秩为1,那么$\mathbf{A}^n=l^{n-1}\mathbf{A},l=\sum_{i=1}^{n} a_{ii}$
+
+\end{enumerate}
+
+\begin{definition}
+    若矩阵的转置与原矩阵相同,那么称这个矩阵为对称矩阵.若矩阵转置后的每一个元素都是原来的相反数,则称这个矩阵为反对称矩阵.反对称矩阵的主对角线元素都为零.
+\end{definition}
+
+矩阵的转置运算规则：
+\begin{enumerate}
+    \item $(\mathbf{A}^\mathrm{T})^\mathrm{T}=\mathbf{A}$
+    \item $(\mathbf{A}+\mathbf{B})^\mathrm{T}=\mathbf{A}^\mathrm{T}+\mathbf{B}^\mathrm{T}$
+    \item $(\lambda \mathbf{A})^\mathrm{T}=\lambda \mathbf{A}^\mathrm{T}$
+    \item $(\mathbf{A}\mathbf{B})^\mathrm{T}=\mathbf{B}^\mathrm{T}\mathbf{A}^\mathrm{T}$
+    \item $\left\lvert \mathbf{A}^\mathrm{T} \right\rvert=\left\lvert \mathbf{A} \right\rvert$
+\end{enumerate}
+\subsubsection{矩阵的逆}
+\begin{definition}
+    对于$n$阶矩阵$\mathbf{A}$,如果存在矩阵$\mathbf{B}$,使$\mathbf{A}\mathbf{B}=\mathbf{B}\mathbf{A}=\mathbf{I} $,则称矩阵$\mathbf{A}$是可逆矩阵或非奇异矩阵,且称$\mathbf{B}$是$\mathbf{A}$的逆矩阵,如果不存在这样的矩阵$\mathbf{B}$,则称$\mathbf{A}$是不可逆矩阵或奇异矩阵.若$\mathbf{A}$可逆,则$\mathbf{A}$一定是方阵,同时其逆阵$\mathbf{B}$也是与同阶的方阵.$\mathbf{A}$的逆阵记作$\mathbf{A}^{-1}$,$\mathbf{A}\mathbf{A}^{-1}=\mathbf{I}$.
+\end{definition}
+
+\begin{ttheorem}
+    矩阵$\mathbf{A}$如果可逆,则其逆阵是唯一的.
+\end{ttheorem}
+
+\begin{ttheorem}
+    矩阵$\mathbf{A}$如果可逆,则$\left\lvert \mathbf{A} \right\rvert\neq 0$.
+\end{ttheorem}
+
+\begin{ttheorem}
+    若$\mathbf{A},\mathbf{B}$是$n$阶矩阵且$\mathbf{A}\mathbf{B}=\mathbf{I}$,则$\mathbf{B}\mathbf{A}=\mathbf{I}$.
+\end{ttheorem}
+
+\begin{definition}
+    设$\mathbf{A}=(a_{ij})_{n\times n}$,$A_{ij}$是行列式$\left\lvert \mathbf{A} \right\rvert$中的元素$a_{ij},i,j=1,2,\dots,n$的代数余子式,则称n阶方阵
+    \begin{equation*}
+        \begin{pmatrix}
+        A_{11}   &   A_{21}   &   \dots   &   A_{n1}   \\
+        A_{12}   &   A_{22}   &   \dots   &   A_{n2}   \\
+        \dots   &   \dots   &   \ddots   &   \dots   \\
+        A_{1n}   &   A_{2n}   &   \dots   &   A_{nn}   \\
+        \end{pmatrix}
+    \end{equation*}
+    为矩阵$\mathbf{A}$的伴随矩阵,记作$\mathbf{A}^*$.
+\end{definition}
+
+\begin{ttheorem}
+    $\mathbf{A}$为$n$阶方阵,则$\mathbf{A}\mathbf{A}^*=\mathbf{A}^*\mathbf{A}=\left\lvert \mathbf{A} \right\rvert\mathbf{I} $.
+\end{ttheorem}
+
+\begin{ttheorem}
+    若$\left\lvert \mathbf{A} \right\rvert\neq 0$,则$\mathbf{A}$可逆,且有
+    \begin{equation*}
+        \mathbf{A}^{-1}=\frac{1}{\left\lvert \mathbf{A} \right\rvert}\mathbf{A}^*
+    \end{equation*}
+    $\mathbf{A}^*$为方阵$\mathbf{A}$的伴随矩阵.
+\end{ttheorem}
+
+\begin{ttheorem}
+    若$\mathbf{A}\mathbf{B}=\mathbf{I} $或$\mathbf{B}\mathbf{A}=\mathbf{I} $,则$\mathbf{A},\mathbf{B}$互逆,即$\mathbf{A}^{-1}=\mathbf{B},\mathbf{B}^{-1}=\mathbf{A}$.
+\end{ttheorem}
+
+方阵逆阵的运算规则：
+\begin{enumerate}
+    \item 若$\mathbf{A}$可逆,则$\mathbf{A}^{-1}$亦可逆,且$(\mathbf{A}^{-1})^{-1}=\mathbf{A}$
+    \item 若$\mathbf{A}$可逆,$\lambda \neq 0$,则$\lambda \mathbf{A}$可逆,且$(\lambda \mathbf{A})^{-1}=\frac{1}{\lambda}\mathbf{A}^{-1}$
+    \item $(\mathbf{A}\mathbf{B}\mathbf{C})^{-1}=\mathbf{C}^{-1}\mathbf{B}^{-1}\mathbf{A}^{-1}$
+    \item 若$\mathbf{A},\mathbf{B}$为同阶可逆矩阵,则$\mathbf{A}\mathbf{B}$亦可逆,且$(\mathbf{A}\mathbf{B})^{-1}=\mathbf{B}^{-1}\mathbf{A}^{-1}$
+    \item 若$\mathbf{A},\mathbf{B}$为同阶可逆矩阵,则$(\mathbf{A}\mathbf{B})^{*}=\mathbf{B}^{*}\mathbf{A}^{*}$
+    
+    \zheng $(\mathbf{A}\mathbf{B})^{*}=\left\lvert \mathbf{A}\mathbf{B}\right\rvert (\mathbf{A}\mathbf{B})^{-1}=\left\lvert \mathbf{A}\right\rvert \left\lvert \mathbf{B}\right\rvert \mathbf{B}^{-1}\mathbf{A}^{-1}=(\left\lvert \mathbf{B}\right\rvert \mathbf{B}^{-1})(\left\lvert \mathbf{A}\right\rvert \mathbf{A}^{-1})=\mathbf{B}^{*}\mathbf{A}^{*}$
+    \item 若$\mathbf{A}$可逆,则$\mathbf{A}^\mathrm{T} $可逆,且$(\mathbf{A}^\mathrm{T})^{-1}=(\mathbf{A}^{-1})^\mathrm{T} $
+    \item 若$\mathbf{A}$可逆,$k$为正整数,则$\mathbf{A}^{-k}=(\mathbf{A}^{-1})^k$.
+    
+    \txe{注：这将方阵的幂运算推广到了负整数.}
+    \item 若$\mathbf{A}$可逆,则$\mathbf{A}^*$可逆,且{\color{Blue}$(\mathbf{A}^*)^{-1}=\frac{1}{\left\lvert \mathbf{A} \right\rvert}\mathbf{A} $}.
+    
+    \zheng $\mathbf{A}^*=\left\lvert \mathbf{A} \right\rvert\mathbf{A}^{-1}\implies (\mathbf{A}^*)^{-1}=(\left\lvert \mathbf{A} \right\rvert\mathbf{A}^{-1})^{-1}=\frac{1}{\left\lvert \mathbf{A} \right\rvert}\mathbf{A}$
+    \item 若$\mathbf{A}$可逆,$\mathbf{B}$可逆,$\mathbf{A}+\mathbf{B}$未必可逆
+    \item 无论$\mathbf{A}$是否可逆,{\color{Blue}$\left\lvert \mathbf{A}^* \right\rvert=\left\lvert \mathbf{A} \right\rvert^{n-1},(\mathbf{A}^*)^*=\left\lvert \mathbf{A} \right\rvert^{n-2} \mathbf{A}$}
+    
+    \zheng $\left\lvert \mathbf{A}^*\right\rvert =\left\lvert \left\lvert \mathbf{A} \right\rvert\mathbf{A}^{-1}\right\rvert =\left\lvert \mathbf{A} \right\rvert^n\cdot \left\lvert \mathbf{A} \right\rvert^{-1}=\left\lvert \mathbf{A} \right\rvert^{n-1}$
+
+    $(\mathbf{A}^*)^*=\left\lvert \mathbf{A}^* \right\rvert\cdot\mathbf{A}^{-1}=\left\lvert \mathbf{A} \right\rvert^{n-2}\mathbf{A}$
+    \item $(\mathbf{A}^\mathrm{T})^*=(\mathbf{A}^*)^\mathrm{T} $
+    \item {\color{Blue}$(k\mathbf{A})^*=k^{n-1}\mathbf{A}^*$}.
+    
+    \zheng $(k\mathbf{A})^*=\left\lvert k\mathbf{A}\right\rvert \cdot(k\mathbf{A})^{-1}=k^n\left\lvert \mathbf{A} \right\rvert k^{-1}\mathbf{A}^{-1}=k^{n-1}\mathbf{A}^*$
+\end{enumerate}
+
+二阶可逆矩阵$\mathbf{A}=\begin{pmatrix}
+a_{11}   &   a_{12}   \\
+a_{21}   &   a_{22}   \\
+\end{pmatrix}$的伴随矩阵为$\mathbf{A}^{*}=\begin{pmatrix}
+    a_{22}   &   -a_{12}   \\
+    -a_{21}   &   a_{11}   \\
+    \end{pmatrix}$,交换主对角线元素,副对角线元素变为相反数.
+
+故它的逆矩阵为$\mathbf{A}^{-1}=\dfrac{1}{\left\lvert \mathbf{A}\right\rvert }\begin{pmatrix}
+a_{22}   &   -a_{12}   \\
+-a_{21}   &   a_{11}   \\
+\end{pmatrix}$
+
+判断矩阵$\mathbf{A}$可逆的两种方法：
+$\begin{dcases}
+    \text{一、使用定义.即}\mathbf{A}\mathbf{B}=\mathbf{B}\mathbf{A}=\mathbf{I} .\\
+    \text{二、}\left\lvert \mathbf{A} \right\rvert \neq 0.
+\end{dcases}$
+
+求矩阵逆矩阵的三种方法：
+$\begin{dcases}
+    \text{一、}\mathbf{A}^{-1}=\frac{1}{\left\lvert \mathbf{A} \right\rvert}\mathbf{A}^*;\\
+    \text{二、初等变换法};\\
+    \text{三、用定义计算,待定系数法}.
+\end{dcases}$
+
+\begin{theorem}[矩阵、行列式和线性方程组之间的关系]
+    线性方程组$(m=n)$中,系数矩阵$\mathbf{A}$是一个$n$阶方阵.
+    \begin{gather*}
+        \begin{cases}
+            a_{11}x_1+a_{12}x_2+\dotsm+a_{1n}x_n= b_1 \\
+            a_{21}x_1+a_{22}x_2+\dotsm+a_{2n}x_n= b_2 \\
+            \dots \\
+            a_{m1}x_1+a_{m2}x_2+\dotsm+a_{mn}x_n= b_m \\
+        \end{cases}
+    \end{gather*}
+    我们可以得到：
+    \begin{gather*}
+        \vert \mathbf{A} \vert \neq 0 \iff \text{$\mathbf{A}$可逆} \iff \mathbf{A}^{-1}=\frac{1}{\left\lvert \mathbf{A} \right\rvert}\mathbf{A}^*\\
+        \iff \text{矩阵$\mathbf{A}$满秩}, r(\mathbf{A})=n\\
+        \iff \mathbf{A} \text{没有零特征值} \\
+        \iff \text{矩阵$\mathbf{A}$经有限次初等变换后化为$\mathbf{I}$}\iff \text{$\mathbf{A}$的等价标准型为$\mathbf{I}_n$}\\
+        \iff \text{线性方程组有唯一解} \iff \text{对应的齐次线性方程组仅有零解} \\
+        \iff \text{矩阵$\mathbf{A}$的行向量组线性无关,矩阵$\mathbf{A}$的列向量组也线性无关} 
+    \end{gather*}
+\end{theorem}
+\subsubsection{分块矩阵}
+给矩阵分块有利于简化运算,分块矩阵具有一般矩阵的加减、数乘运算规则.
+
+如果$\mathbf{A}$为方阵,且只在对角线上有非零的方阵子块,那么称$\mathbf{A}$为分块对角阵,也成为准对角阵.
+\begin{equation*}
+    \mathbf{A}=\begin{pmatrix}
+        \mathbf{A}_1   &      &      &      \\
+           &   \mathbf{A}_2   &      &      \\
+           &      &   \ddots   &      \\
+           &      &      &   \mathbf{A}_n   \\
+        \end{pmatrix}
+\end{equation*}
+分块对角阵有下面的运算规则:
+\begin{enumerate}
+    \item $\left\lvert \mathbf{A} \right\rvert =\left\lvert \mathbf{A} _1 \right\rvert \cdot \left\lvert \mathbf{A} _2 \right\rvert \dots \left\lvert \mathbf{A} _n \right\rvert $
+    \item 若$\left\lvert \mathbf{A} \right\rvert\neq 0$,则$\mathbf{A}^{-1}=\begin{pmatrix}
+        \mathbf{A}_1^{-1}   &      &      &      \\
+           &   \mathbf{A}_2^{-1}   &      &      \\
+           &      &   \ddots   &      \\
+           &      &      &   \mathbf{A}_n^{-1}   \\
+        \end{pmatrix}
+    $
+    \item $\mathbf{A}^{n}=\begin{pmatrix}
+        \mathbf{A}_1^{n}   &      &      &      \\
+           &   \mathbf{A}_2^{n}   &      &      \\
+           &      &   \ddots   &      \\
+           &      &      &   \mathbf{A}_n^{n}   \\
+        \end{pmatrix}
+    $
+\end{enumerate}
+
+对于分块后是副对角线上的三角形矩阵,若$\mathbf{B}$是$m$阶矩阵,$\mathbf{C}$是$n$阶矩阵,则有:
+\begin{enumerate}
+    \item 若$\mathbf{A}=\begin{pmatrix}
+        \mathbf{O}   &   \mathbf{B}   \\
+        \mathbf{C}   &   \mathbf{O}   \\
+        \end{pmatrix}$,
+    那么$\mathbf{A}^{-1}=\begin{pmatrix}
+        \mathbf{O}   &   \mathbf{C}^{-1}   \\
+        \mathbf{B}^{-1}   &   \mathbf{O}   \\
+        \end{pmatrix}$
+    \item $\begin{vmatrix}
+        \mathbf{A}   &   \mathbf{C}   \\
+        \mathbf{B}   &   \mathbf{O}   \\
+    \end{vmatrix}
+    =
+    \begin{vmatrix}
+        \mathbf{O}   &   \mathbf{C}   \\
+        \mathbf{B}   &   \mathbf{D}   \\
+    \end{vmatrix}
+    =
+    (-1)^{mn}\left\lvert \mathbf{B} \right\rvert \cdot \left\lvert \mathbf{C} \right\rvert $
+\end{enumerate}
+
+\begin{definition}[矩阵的初等变换]
+
+    以下三种变换称为矩阵的初等行（列）变换：
+    \begin{enumerate}
+        \item 互换两行（列）
+        \item 以非零数$k$乘上某一行（列）
+        \item 把一行（列）的$k$倍加到另一行（列）
+    \end{enumerate}
+\end{definition}
+
+\begin{definition}[行阶梯矩阵和行最简型]
+    \begin{enumerate}
+        \item 如果有零行,那么零行全部位于该矩阵的下方
+        \item 各个非零行（元素不全为零的行）的第一个不为零的元素（简称为首非零元）的列标随着行标的递增而严格增大
+        \item 各个首非零元都是1
+        \item 各个首非零元所在列的其他元素全是零
+    \end{enumerate}
+    满足1,2条件的矩阵称为行阶梯型矩阵,满足条件1,2,3,4的矩阵称为行最简型.
+\end{definition}
+
+\begin{definition}
+    单位矩阵经一次初等变化所得的矩阵称为初等矩阵,简称为初等阵.
+\end{definition}
+
+\begin{ttheorem}
+    初等阵是可逆阵,且其逆阵仍为同类型可逆阵.且有
+    \begin{equation*}
+        \mathbf{I}^{-1}(i,j)=\mathbf{I}(i,j);
+        \mathbf{I}^{-1}(i(k))=\mathbf{I}(i(\frac{1}{k}));
+        \mathbf{I}^{-1}(j(k),i)=\mathbf{I}(j(-k),i);
+    \end{equation*}
+\end{ttheorem}
+
+这个定理可以用来计算初等阵的逆矩阵.$\mathbf{I}(i,j)$表示交换单位矩阵的$i,j$两行.$\mathbf{I}(i(k))$表示用$k$乘以第$i$行,$\mathbf{I}(j(k),i)$表示$k$乘以第$j$行加到第$i$行.
+
+\begin{ttheorem}
+    设$\mathbf{A}$是$m\times n$矩阵,对$\mathbf{A}$实行一次初等行变换相当于左乘一个相应的$m$阶初等阵；而对$\mathbf{A}$实行一次列变换,相当于对$\mathbf{A}$右乘一个相应的$n$阶初等阵.
+\end{ttheorem}
+
+\begin{ttheorem}
+    设$\mathbf{A}$为$n$阶可逆方阵,则经初等变换后仍为可逆方阵.
+\end{ttheorem}
+
+\begin{ttheorem}
+    $n$阶可逆阵,经有限次行变换可以变为单位矩阵.
+\end{ttheorem}
+
+\begin{ttheorem}
+    任意可逆阵可分解为若干初等阵的乘积.
+\end{ttheorem}
+
+\subsubsection{矩阵的秩}
+
+\begin{definition}
+    设$\mathbf{A}$是$m\times n$矩阵,若$\mathbf{A}$中存在$r$阶子式不等于零,$r$阶以上子式均等于0,则称矩阵$\mathbf{A}$的秩为$r$,零矩阵的秩规定为0.
+\end{definition}
+
+\begin{definition}
+    若矩阵$\mathbf{A}$经初等变换成为矩阵$\mathbf{B}$,则称$\mathbf{A}$与$\mathbf{B}$等价,记作$\mathbf{A}\cong \mathbf{B}$.
+\end{definition}
+
+\begin{ttheorem}
+    任何矩阵经初等变换后,其秩不变.若$\mathbf{A}$是有$r$个非零行的阶梯型矩阵,则$r(\mathbf{A})=r$.
+\end{ttheorem}
+
+这个定理可以让我们在求矩阵秩的时候同时使用初等行变换和列变换.
+
+如果两个矩阵等价,那么他们的秩相同,从而标准型相同.
+
+\begin{ttheorem}
+    $\mathbf{A}$是$n$阶方阵,
+    \begin{gather*}
+        r(\mathbf{A})<n \iff \left\lvert \mathbf{A}\right\rvert =0 \iff \text{矩阵$\mathbf{A}$不可逆}\\
+        r(\mathbf{A})=n\iff \left\lvert \mathbf{A}\right\rvert \neq 0 \iff \text{矩阵$\mathbf{A}$满秩} \iff \text{矩阵$\mathbf{A}$可逆}\\
+    \end{gather*}
+\end{ttheorem}
+
+\begin{ttheorem}
+    设有矩阵$\mathbf{A}=(a_{ij})_{m\times n}$与$\mathbf{B}(b_{ij})_{n\times s}$,则
+    \begin{gather*}
+        r(\mathbf{A}\mathbf{B})\leqslant \min\left\{r(\mathbf{A}),r(\mathbf{B})\right\} 
+    \end{gather*}
+\end{ttheorem}
+
+矩阵的秩的公式：
+\begin{enumerate}
+    \item 若$k\neq 0,r(k \mathbf{A})=r(\mathbf{A})$
+    \item $r(\mathbf{A})=r(\mathbf{A}^\mathrm{T})$
+    \item $r(\mathbf{A}^\mathrm{T}\mathbf{A})=r(\mathbf{A})$
+    \item $r(\mathbf{A}+\mathbf{B}) \leqslant r(\mathbf{A})+r(\mathbf{B})$
+    \item $\max\left\{r(\mathbf{A}),r(\mathbf{B})\right\} \leqslant r(\mathbf{A},\mathbf{B})\leqslant r(\mathbf{A})+r(\mathbf{B})$
+    \item 若$\mathbf{A}$可逆,则$r(\mathbf{A}\mathbf{B})=r(\mathbf{B}),r(\mathbf{B}\mathbf{A})=r(\mathbf{B})$
+    \item 设矩阵$\mathbf{A}$是$m\times n$矩阵,$\mathbf{B}$是$n\times s$矩阵,若$\mathbf{A}\mathbf{B}=\mathbf{O}$,则$r(\mathbf{A})+r(\mathbf{B}) \leqslant n$
+    \item 伴随矩阵秩的公式$r(\mathbf{A}^*)=\begin{dcases}
+    n,r(\mathbf{A})=n,\\
+    1,r(\mathbf{A})=n-1,\\
+    0,r(\mathbf{A})<n-1.
+    \end{dcases}$
+\end{enumerate}
+
+由公式3可知：$\mathbf{A}\mathbf{A}^\mathrm{T}=\mathbf{O} \implies \mathbf{A}=\mathbf{O}$,因为$r(\mathbf{A}\mathbf{A}^\mathrm{T})=r(\mathbf{A}),r(\mathbf{A}\mathbf{A}^\mathrm{T})=0 \implies r(\mathbf{A})=0 \implies \mathbf{A}=\mathbf{O}$.
+
+若$\mathbf{A}$为$n$阶矩阵,$\mathbf{A}^*\neq 0$,则说明存在$n-1$阶子式不等于零,则$r(\mathbf{A})\geqslant n-1$.
+
+\begin{ttheorem}
+    设矩阵$\mathbf{A}$是$n$阶矩阵,$\mathbf{B}$是$n\times m$矩阵,$r(\mathbf{B})=n$,若$\mathbf{A}\mathbf{B}=\mathbf{O}$,则$\mathbf{A}=\mathbf{O}$.
+
+    \zheng 由$\mathbf{A}\mathbf{B}=\mathbf{O}\implies r(\mathbf{A})+r(\mathbf{B})\leqslant n$又$r(\mathbf{B})=n \implies r(\mathbf{B})=0 \implies \mathbf{A}=\mathbf{O}$
+\end{ttheorem}
+
+\begin{examp}{化矩阵
+    $\begin{pmatrix}
+    5   &   7   &   2   &   0   \\
+    3   &   5   &   6   &   -4   \\
+    4   &   5   &   -2   &   3   \\
+    \end{pmatrix}$为行最简型}
+
+    \jie 化简时注意观察,不一定要将第一行的倍数加到第二三行,本题如果这样做计算过程会产生分数,大大增加计算复杂程度.将第一行减去第三行,就可以将第一个元素化为1.
+    \begin{equation*}
+        \begin{pmatrix}
+        5   &   7   &   2   &   0   \\
+        3   &   5   &   6   &   -4   \\
+        4   &   5   &   -2   &   3   \\
+        \end{pmatrix}
+    \rightarrow 
+        \begin{pmatrix}
+        1   &   2   &   4   &   3   \\
+        3   &   5   &   6   &   -4   \\
+        4   &   5   &   -2   &   3   \\
+        \end{pmatrix}
+    \rightarrow
+        \begin{pmatrix}
+        1   &   0   &   -8   &   7   \\
+        0   &   1   &   6   &   -5   \\
+        0   &   0   &   0   &   0   \\
+        \end{pmatrix}
+    \end{equation*}
+\end{examp}
+
+\begin{examp}{矩阵
+    $\begin{pmatrix}
+    1   &   1   &   a   &   4   \\
+    -1   &   a   &   1   &   a^2   \\
+    1   &   -1   &   2   &   -4   \\
+    \end{pmatrix}$的秩为2,求$a$的值}
+
+    \jie 如果矩阵中含有未知数,在化为行阶梯矩阵时要注意把不含有未知数的行放到前面,把各行中未知数元素靠前的行放到下面.这样在化简过程中可以避免除一个可能为零的数,避免了分类讨论.
+    \begin{equation*}
+        \begin{pmatrix}
+        1   &   1   &   a   &   4   \\
+        -1   &   a   &   1   &   a^2   \\
+        1   &   -1   &   2   &   -4   \\
+        \end{pmatrix}
+    \rightarrow 
+        \begin{pmatrix}
+        1   &   -1   &   2   &   -4   \\
+        1   &   1   &   a   &   4   \\
+        -1   &   a   &   1   &   a^2   \\
+        \end{pmatrix}
+    \rightarrow
+        \begin{pmatrix}
+        1   &   -1   &   2   &   -4   \\
+        0   &   2   &   a-2   &   8   \\
+        0   &   0   &   \frac{(a+1)(4-a)}{2}   &   a(a-4)   \\
+        \end{pmatrix}
+    \end{equation*}
+
+    故$a=4$.
+\end{examp}
+
+如果$\mathbf{A}$是三阶实对称矩阵,秩为2,就意味着$\mathbf{A}$通过初等变换后的最后一行为0,则$\mathbf{A}$的行列式为0.故可知0是$\mathbf{A}$的一个特征值.原因从矩阵的秩的定义去理解,矩阵$\mathbf{A}$的秩为2意味着$\mathbf{A}$的二阶子式不全为0,而二阶以上的子式全为0,即$\left\lvert \mathbf{A}\right\rvert =0$
+
+\subsubsection{相似矩阵、合同矩阵、正交矩阵}
+\begin{definition}
+    若$\mathbf{A},\mathbf{B}$为$n$阶方阵,若存在$n$阶可逆方阵$\mathbf{P}$使得$\mathbf{P}^{-1}\mathbf{A}\mathbf{P}=\mathbf{B}$,则称$\mathbf{A}$与$\mathbf{B}$相似,记为$\mathbf{A}\sim \mathbf{B}$.
+\end{definition}
+
+若$\mathbf{A}$与$\mathbf{B}$相似,则: 
+\begin{enumerate}
+    \item $\mathbf{A},\mathbf{B}$有相同的特征多项式与特征值.$\left\lvert \lambda\mathbf{I}-\mathbf{A}\right\rvert =\left\lvert \lambda\mathbf{I}-\mathbf{B}\right\rvert $
+    \item 相似矩阵具有相同的行列式及相同的迹.$\left\lvert \mathbf{A}\right\rvert =\left\lvert \mathbf{B}\right\rvert =\prod ^n_{i=1}\lambda_i$
+    \item $\sum_{i=1}^{n} a_{ii}=\sum_{i=1}^{n} b_{ii}=\sum_{i=1}^{n} \lambda_{ii}$
+    \item 相似矩阵的秩相同.$r(\mathbf{A})=r(\mathbf{B})$
+    \item $\mathbf{A}^m\sim \mathbf{B}^m$,其中$m$为自然数.
+    \item $\mathbf{A}^{-1}\sim \mathbf{B}^{-1}$
+    \item $\mathbf{A}+k\mathbf{I}\sim \mathbf{B}+k\mathbf{I}$
+    \item 若$\mathbf{A}$可逆,则$\mathbf{A}\mathbf{B}\sim\mathbf{B}\mathbf{A}$
+    
+    \zheng $\mathbf{A}^{-1}(\mathbf{A}\mathbf{B})\mathbf{A}=\mathbf{B}\mathbf{A} \implies \mathbf{A}\mathbf{B}\sim\mathbf{B}\mathbf{A}$
+
+    \item $\mathbf{A}^\mathbf{T}\sim \mathbf{B}^\mathbf{T}$
+\end{enumerate}
+
+做题时有时解含参矩阵的特征值是很困难的,因式分解太过复杂,这时利用相似矩阵有相同的特征多项式即可解出参数,无需解特征值.
+
+\begin{definition}
+    设$\mathbf{A},\mathbf{B}$是两个$n$阶方阵,若存在可逆阵$\mathbf{C}$,使得$\mathbf{C}^\mathrm{T}\mathbf{A}\mathbf{C}=\mathbf{B}$,则称$\mathbf{A}$合同与$\mathbf{B}$,记作$\mathbf{A}\simeq \mathbf{B}$.
+\end{definition}
+
+\begin{definition}
+    若$n$阶实矩阵$\mathbf{Q}$满足
+    \begin{equation*}
+        \mathbf{Q}^\mathrm{T}\mathbf{Q}=\mathbf{I}
+    \end{equation*}
+    则称$\mathbf{Q}$为$n$阶正交矩阵.
+\end{definition}
+
+\begin{ttheorem}
+    $n$阶实矩阵$\mathbf{Q}$为正交矩阵的充分必要条件为$\mathbf{Q}$可逆,且$\mathbf{Q}^{-1}=\mathbf{Q}^\mathrm{T}$
+\end{ttheorem}
+
+\begin{ttheorem}
+    $n$阶实矩阵$\mathbf{Q}$为正交矩阵的充分必要条件为$\mathbf{Q}$的行列向量都是单位向量且两两正交.
+\end{ttheorem}
+
+若$n$阶实矩阵为正交矩阵,则$\left\lvert \mathbf{Q}\right\rvert =1 \text{或}-1$.
+
+若$n$阶实矩阵$\mathbf{P},\mathbf{Q}$为正交矩阵,则$\mathbf{P}\mathbf{Q}$也是$n$阶正交矩阵.
+
+正交矩阵是满秩的.
+
+\subsection{向量}
+\begin{definition}
+    $n$个数所组成的有序数组成为$n$维向量,记作：
+    \begin{equation*}
+    \begin{pmatrix}
+    a_1   \\
+    a_2   \\
+    \vdots   \\
+    a_n   \\
+    \end{pmatrix},
+    \end{equation*}
+    其中第$i$个数$a_i$称为向量的第$i$个分量.
+\end{definition}
+\begin{definition}
+    所有分量都为零的向量称为零向量,零向量记作$\mathbf{0}$,即
+    \begin{equation*}
+    \mathbf{0}=\begin{pmatrix}
+    0   \\
+    0   \\
+    \vdots   \\
+    0   \\
+    \end{pmatrix}.
+    \end{equation*}
+\end{definition}
+\begin{definition}
+    设$\alpha=(a_1,a_2,\dots,a_n)^\mathrm{T}$向量与$\beta=(b_1,b_2,\dots,b_n)^\mathrm{T}$,称实数$\sum_{i=1}^{n} a_ib_i$为向量$\alpha$与$\beta$的内积,记为$(\alpha,\beta)$,即
+    \begin{equation*}
+        (\alpha,\beta)=\alpha^\mathrm{T}\beta=\beta^\mathrm{T}\alpha=\sum_{i=1}^{n} a_ib_i
+    \end{equation*}
+\end{definition}
+内积的性质
+\begin{enumerate}
+    \item $(k\alpha,\beta)=(\alpha,k\beta)=k(\alpha,\beta)$
+    \item $(\alpha+\beta,\gamma)=(\alpha,\gamma)+(\beta,\gamma)$
+    \item $(\alpha,\alpha)\geqslant 0$,当且仅当$\alpha=\mathbf{0}$时,$(\alpha,\alpha)=0$
+\end{enumerate}
+
+\begin{definition}
+    设$\alpha=(a_1,a_2,\dots,a_n)^\mathrm{T}$,则$\alpha$的长度定义为
+    \begin{equation*}
+        \sqrt{(\alpha,\alpha)}=\sqrt{a_1^2+a_2^2+\dots+a_n^2}
+    \end{equation*}
+    记作$\left\lVert \alpha \right\rVert $,向量的长度也称为向量的范数.
+\end{definition}
+易得$(\alpha,\alpha)=\left\lVert \alpha \right\rVert^2 $
+
+向量长度的性质
+\begin{enumerate}
+    \item $\left\lVert \alpha \right\rVert \geqslant 0$ ,当且仅当$\alpha =0$,$\left\lVert \alpha \right\rVert = 0$.
+    \item $\left\lVert k\alpha \right\rVert =\left\lvert k \right\rvert \left\lVert \alpha \right\rVert $,$k$为实数
+    \item 柯西-布涅可夫斯基不等式
+    \begin{equation*}
+        \left\lvert (\alpha,\beta) \right\rvert \leqslant \left\lVert \alpha \right\rVert\cdot \left\lVert \beta \right\rVert\text{或}\left\lvert \sum_{i=1}^{n} a_ib_i\right\rvert \leqslant \sqrt{\sum_{i=1}^{n} a_i^2}\cdot \sqrt{\sum_{i=1}^{n} b_i^2}
+    \end{equation*}
+    当且仅当存在实数$l$,使$\alpha=l\beta$或$\beta=l\alpha$时,等号成立.
+\end{enumerate}
+
+\begin{definition}
+    设$\alpha=(a_1,a_2,\dots,a_n)^\mathrm{T}$,若$\left\lVert \alpha\right\rVert =1$,则称为单位向量.
+\end{definition}
+若$\alpha$为非零向量,可以通过$\dfrac{\alpha}{\left\lVert \alpha \right\rVert }$将向量化为单位向量,这个过程称为单位化或标准化.
+
+\begin{definition}
+    设向量$\alpha=(a_1,a_2,\dots,a_n)^\mathrm{T}$与向量$\beta=(b_1,b_2,\dots,b_n)^\mathrm{T}$,则称非负实数
+    \begin{equation*}
+        \sqrt{(a_1-b_1)^2+(a_2-b_2)^2+\dots+(a_n-b_n)^2}
+    \end{equation*}
+    为向量$\alpha$与$\beta$之间的距离,记为$d$.
+\end{definition}
+易得,$d=\left\lVert \alpha-\beta \right\rVert $.
+
+\begin{definition}
+    设向量$\alpha=(a_1,a_2,\dots,a_n)^\mathrm{T}$与向量$\beta=(b_1,b_2,\dots,b_n)^\mathrm{T}$,则称
+    \begin{equation*}
+        \arccos \frac{(\alpha,\beta)}{\left\lVert \alpha\right\rVert \cdot\left\lVert \beta\right\rVert }
+    \end{equation*}
+    为向量$\alpha$与$\beta$之间的夹角,记为$\theta ,\theta \in (0,\pi)$.
+\end{definition}
+
+\begin{definition}
+    设向量$\alpha=(a_1,a_2,\dots,a_n)^\mathrm{T}$与向量$\beta=(b_1,b_2,\dots,b_n)^\mathrm{T}$,若满足$(\alpha,\beta)=0$,则称向量$\alpha$与$\beta$正交,记作$\alpha\bot \beta$.
+\end{definition}
+显然,若两个非零向量正交,那么他们之间的夹角为$\frac{\pi}{2}$.
+
+向量正交的性质：
+\begin{enumerate}
+    \item 零向量与任何的向量正交,$0\bot \alpha$
+    \item 与自身正交的向量只有零向量
+    \item 三角不等式
+    \begin{equation*}
+        \left\lVert \alpha+\beta\right\rVert  \leqslant \left\lVert \alpha\right\rVert +\left\lVert \beta\right\rVert 
+    \end{equation*}
+    特别地,等式$\left\lVert \alpha+\beta\right\rVert ^2=\left\lVert \alpha\right\rVert ^2+\left\lVert \beta\right\rVert ^2$当且仅当$\alpha$与$\beta$正交时成立.
+\end{enumerate}
+\subsubsection{向量的线性表示}
+\begin{definition}
+    对于向量组$\alpha_1,\alpha_2,\dots,\alpha_s$和向量$\beta$,如果存在一组实数$k$,使得
+    \begin{equation*}
+        \beta=k_1\alpha_1+k_2\alpha_2+\dots+k_s\alpha_s
+    \end{equation*}
+    则称向量$\beta$是向量组$\alpha_1,\alpha_2,\dots,\alpha_s$的线性组合,亦称向量$\beta$可由向量组$\alpha_1,\alpha_2,\dots,\alpha_s$线性表示.
+\end{definition}
+易得,$n$维零向量是任一$n$维向量组的线性组合.
+
+\begin{ttheorem}
+    如果$n$维向量的向量组$\alpha_1,\alpha_2,\dots,\alpha_n$线性无关,那么任意一个$n$维向量都可以由这个向量组线性表示.
+\end{ttheorem}
+
+任一$n$维向量$\alpha=(a_1,a_2,\dots,a_n)^\mathrm{T}$是$n$维基本单位向量组的线性组合.即$\alpha=a_1\varepsilon_1+a_2\varepsilon_2+\dots+a_n\varepsilon_n$.
+
+\subsubsection{线性相关与线性无关}
+\begin{definition}
+    对于向量组$\alpha_1,\alpha_2,\dots,\alpha_s$,如果存在不全为零的数$k_1,k_2,\dots,k_s$,使得
+    \begin{equation*}
+        k_1\alpha_1+k_2\alpha_2+\dots+k_s\alpha_s=0
+    \end{equation*}
+    则称向量组$\alpha_1,\alpha_2,\dots,\alpha_s$线性相关；否则称向量组$\alpha_1,\alpha_2,\dots,\alpha_s$线性无关.
+\end{definition}
+
+\begin{ttheorem}
+    $n$个$n$维向量$\alpha_i=(\alpha_{i1},\alpha_{i2},\dots,\alpha_{in})^\mathrm{T},i=1,2,\dots,n$线性无关的充分必要条件是行列式
+    \begin{equation*}
+        D=
+        \begin{vmatrix}
+            a_{11}   &   a_{12}   &   \dots   &   a_{1n}   \\
+            a_{21}   &   a_{22}   &   \dots   &   a_{2n}   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            a_{n1}   &   a_{n2}   &   \dots   &   a_{nn}   \\
+        \end{vmatrix}\neq 0
+    \end{equation*}
+    线性相关的充分必要条件是行列式
+    \begin{equation*}
+        D=
+        \begin{vmatrix}
+            a_{11}   &   a_{12}   &   \dots   &   a_{1n}   \\
+            a_{21}   &   a_{22}   &   \dots   &   a_{2n}   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            a_{n1}   &   a_{n2}   &   \dots   &   a_{nn}   \\
+        \end{vmatrix}= 0
+    \end{equation*}
+\end{ttheorem}
+\begin{ttheorem}
+    若向量组中向量的个数大于向量的维数,则向量组线性相关.
+\end{ttheorem}
+该定理的证明见定理56.
+
+当矩阵的行数大于列数时,根据该定理：若向量组中向量的个数大于向量的维数,则向量组线性相关.我们知道矩阵至少一个行向量可以由其他行向量线性表示,也就是说可以将这个行向量化成零行放在矩阵末行.重复此步骤,直到矩阵中的非零行的行数等于列数.所以矩阵的行秩总是小于等于行、列数中最小的一个.
+
+这个思想用于线性方程组我们就可以得到,如果方程数量大于未知量个数,我们总是可以把方程数量化简到等于未知数的个数.
+
+\begin{ttheorem}
+    设$\mathbf{A}$是$m\times n$矩阵,矩阵的秩是唯一的,满足
+    \begin{equation*}
+        0\leqslant  r(\mathbf{A}) \leqslant \min\left\{m,n\right\} ,r\in\mathbb{Z} .
+    \end{equation*}
+\end{ttheorem}
+\begin{ttheorem}
+    \begin{gather*}
+        r(\mathbf{A})=0 \iff \mathbf{A}=\mathbf{O}\\
+        \mathbf{A} \neq \mathbf{O} \iff r(\mathbf{A}) \geqslant 1.
+    \end{gather*}
+\end{ttheorem}
+\begin{theorem}[向量组的线性相关]
+
+    \begin{ttheorem}
+        设$r$维向量组$\alpha_i=(a_{i1},a_{i2},\dots,a_{ir})^\mathrm{T},i=1,2,\dots,s$线性无关,则在每一个向量上任意添加$n-r$个分量后得到的$n$维向量组
+        \begin{equation*}
+            \alpha_i'=(a_{i1},a_{i2},\dots,a_{ir},a_{i(r+1)},\dots,a_{in})^\mathrm{T},i=1,2,\dots,s
+        \end{equation*}
+        也线性无关.反之不成立.
+    \end{ttheorem}
+
+    \begin{ttheorem}
+        设$n$维向量组$\alpha_i=(a_{i1},a_{i2},\dots,a_{ir},a_{i(r+1)},\dots,a_{in})^\mathrm{T},i=1,2,\dots,s$线性相关,则在每一个向量后任意删去$n-r$个分量后得到的$r$维向量组
+        \begin{equation*}
+            \alpha_i'=(a_{i1},a_{i2},\dots,a_{ir})^\mathrm{T},i=1,2,\dots,s
+        \end{equation*}
+        也线性相关.反之不成立.
+    \end{ttheorem}
+
+    \begin{ttheorem}
+        如果一个向量组中的部分向量线性相关,那么整个向量组也线性相关.
+    \end{ttheorem}
+    
+    \begin{ttheorem}
+        如果一个向量组线性无关,则他的任意一个部分组也线性无关.
+    \end{ttheorem}
+\end{theorem}
+
+\begin{ttheorem}
+    向量组$\alpha_1,\alpha_2,\dots,\alpha_s,(s \geqslant 2)$线性相关的充分必要条件是其中至少有一个向量能由其余向量线性表示.
+\end{ttheorem}
+
+\begin{ttheorem}
+    向量组$\alpha_1,\alpha_2,\dots,\alpha_s,(s \geqslant 2)$线性无关的充分必要条件是向量组中的每个向量都不能由其余向量线性表示.
+\end{ttheorem}
+
+\begin{ttheorem}
+    如果向量组$\alpha_1,\alpha_2,\dots,\alpha_s$线性无关,而向量组$\alpha_1,\alpha_2,\dots,\alpha_s,\beta$线性相关,则向量$\beta$可由向量组$\alpha_1,\alpha_2,\dots,\alpha_s,(s \geqslant 2)$线性表示,并且表达式唯一.
+\end{ttheorem}
+
+\begin{ttheorem}
+    如果向量$\beta$可由向量组$\alpha_1,\alpha_2,\dots,\alpha_s$线性表示,则$r(\alpha_1,\alpha_2,\dots,\alpha_s)=r(\alpha_1,\alpha_2,\dots,\alpha_s,\beta)$
+\end{ttheorem}
+
+\begin{ttheorem}
+    若向量组由$n$个线性无关的$n$维向量组成,则任意一个$n$维向量都可以由该向量组线性表出.
+\end{ttheorem}
+用矩阵的初等变换求矩阵的秩的过程,实际上就是在把化为零行的行用其他行向量线性表示.
+
+\subsubsection{向量组的秩}
+\begin{definition}
+    如果$n$维向量组的一个部分组$\alpha_1,\alpha_2,\dots,\alpha_r$满足以下条件
+    \begin{enumerate}
+        \item $\alpha_1,\alpha_2,\dots,\alpha_r$线性无关
+        \item 向量组中任一向量都可由$\alpha_1,\alpha_2,\dots,\alpha_r$线性表示
+    \end{enumerate}
+    则称部分组是向量组$\alpha_1,\alpha_2,\dots,\alpha_r$的一个极大线性无关组.
+\end{definition}
+向量组的极大线性无关组若存在,则可能不唯一.
+\begin{definition}
+    向量组的极大无关组$\alpha_1,\alpha_2,\dots,\alpha_s$中所含向量的个数称为向量组的秩.记为$r(\alpha_1,\alpha_2,\dots,\alpha_s)$
+\end{definition}
+
+\begin{ttheorem}
+    矩阵的秩等于他的行秩,也等于他的列秩.
+\end{ttheorem}
+利用该结论,我们可以求出向量组的秩及其极大无关组.
+
+\begin{definition}
+    设有两个向量组$(1)\alpha_1,\alpha_2,\dots,\alpha_s,(2)\beta_1,\beta_2,\dots,\beta_s$,如果$(1)$中的每个向量均可由$(2)$中的向量线性表示,则称向量组$(1)$可由向量组$(2)$线性表示.
+
+    如果向量组$(1)$和向量组$(2)$可以互相线性表示,则称向量组$(1)$和$(2)$等价,记作
+    \begin{equation*}
+        \left\{\alpha_1,\alpha_2,\dots,\alpha_s\right\} \cong \left\{\beta_1,\beta_2,\dots,\beta_s\right\} .
+    \end{equation*}
+\end{definition}
+由于极大无关组的取法不唯一,所以在从向量组$\alpha_1,\alpha_2,\dots,\alpha_s$中任取一极大无关组要换一种表示方法:$\alpha_{i1},\alpha_{i2},\dots,\alpha_{ir}$
+\begin{ttheorem}
+    如果向量组$(1)$可由向量组$(2)$线性表示,则$r(1)\leqslant r(2)$
+\end{ttheorem}
+\begin{ttheorem}
+    如果向量组$(1)$和向量组$(2)$等价,那么$r(1)=r(2)$
+\end{ttheorem}
+\begin{ttheorem}
+    全为零向量的向量组的秩为零,显然有$0 \leqslant r(\alpha_1,\alpha_2,\dots,\alpha_s) \leqslant s$,{\color{Blue}当且仅当$\alpha_1,\alpha_2,\dots,\alpha_s$线性无关时,$r(\alpha_1,\alpha_2,\dots,\alpha_s) = s$}
+\end{ttheorem}
+\begin{ttheorem}
+    如果向量组$\alpha_1,\alpha_2,\dots,\alpha_r$可由向量组$\beta_1,\beta_2,\dots,\beta_s$线性表示,且$r>s$,则向量组$\alpha_1,\alpha_2,\dots,\alpha_r$必线性相关.
+\end{ttheorem}
+\begin{ttheorem}
+    如果向量组$\alpha_1,\alpha_2,\dots,\alpha_r$可由向量组$\beta_1,\beta_2,\dots,\beta_s$线性表示,且向量组$\alpha_1,\alpha_2,\dots,\alpha_r$线性无关,则$r \leqslant s$.
+\end{ttheorem}
+
+求向量组秩的方法：将向量组中的向量看成矩阵的列向量组成一个矩阵,然后用初等变化法化为行阶梯型矩阵,就得出了向量组的秩,同时根据每行第一个不为零的数所在的列,还得出如何将向量组的剩余向量用极大无关组表示.
+
+向量组等价,秩相等,但秩相等不能推出两个向量组等价.向量组$(\alpha_1,\alpha_2,\dots,\alpha_r)$若能线性表示向量组$(\beta_1,\beta_2,\dots,\beta_r)$,本质上就是线性方程组有解,$(\alpha_1,\alpha_2,\dots,\alpha_r)x=\beta_1,(\alpha_1,\alpha_2,\dots,\alpha_r)x=\beta_2,\dots$,所以等价条件是$r(\mathbf{A},\mathbf{B})=r(\mathbf{A})$.(增广矩阵的秩等于系数矩阵的秩.)
+
+\subsubsection{Schimidt正交化}
+
+\begin{definition}
+    设有非零向量组$\alpha_1,\alpha_2,\dots,\alpha_s$,若他们两两正交,即$(\alpha_i,\alpha_j)=0,i,j=1,2,\dots,s$,则称该向量组为正交向量组.
+\end{definition}
+\begin{ttheorem}
+    正交向量组必为线性无关向量组.
+\end{ttheorem}
+设$\alpha_1,\alpha_2,\dots,\alpha_s$为线性无关向量组,则向量组$\beta_1,\beta_2,\dots,\beta_s$为正交向量组.
+\begin{gather*}
+    \beta_1=\alpha_1,\\
+    \beta_i=\alpha_i-\sum_{k=1}^{i-1} \frac{(\alpha_i,\beta_k)}{(\beta_k,\beta_k)}\beta_k,i=2,3,\dots,s
+\end{gather*}
+亦即$\beta_1=\alpha_1,\beta_2=\alpha_2-\frac{(\alpha_2,\beta_1)}{(\beta_1,\beta_1)}\beta_1,\beta_3=\alpha_3-\frac{(\alpha_3,\beta_1)}{(\beta_1,\beta_1)}\beta_1-\frac{(\alpha_3,\beta_2)}{(\beta_2,\beta_2)}\beta_2,\dots$
+
+接下来再将向量组$\beta_1,\beta_2,\dots,\beta_s$单位化,
+\begin{gather*}
+    \eta _i=\frac{\beta_i}{\left\lVert \beta_i \right\rVert }.
+\end{gather*}
+
+\subsection{线性方程组}
+\subsubsection{线性方程组解的存在性}
+
+\begin{ttheorem}
+    一个一般的线性方程组
+    \begin{equation*}
+        \begin{cases}
+            a_{11}x_1+a_{12}x_2+\dotsm+a_{1n}x_n= b_1 \\
+            a_{21}x_1+a_{22}x_2+\dotsm+a_{2n}x_n= b_2 \\
+            \dots \\
+            a_{m1}x_1+a_{m2}x_2+\dotsm+a_{mn}x_n= b_m \\
+        \end{cases}
+    \end{equation*}
+    有解的充分必要条件是系数矩阵$\mathbf{A}$的秩等于增广矩阵$\widetilde{\mathbf{A}} $的秩,即$r(\mathbf{A})=r(\widetilde{\mathbf{A}} )$.当$r=n$时,方程组有唯一解.
+\end{ttheorem}
+
+需要注意的是,若系数矩阵不是方阵,而是$m\times n$矩阵,那么$n$才代表变量个数,$m$代表方程的个数.
+
+\begin{theorem}[克拉默(Cramer)法则]
+    对于一个一般的线性方程组
+    \begin{gather*}
+        \begin{cases}
+            a_{11}x_1+a_{12}x_2+\dotsm+a_{1n}x_n= b_1 \\
+            a_{21}x_1+a_{22}x_2+\dotsm+a_{2n}x_n= b_2 \\
+            \dots \\
+            a_{m1}x_1+a_{m2}x_2+\dotsm+a_{mn}x_n= b_m \\
+        \end{cases}
+    \end{gather*}
+    当$m=n$时,如果系数行列式$\left\lvert \mathbf{A}\right\rvert \neq 0$,则方程组有唯一解：
+    \begin{equation*}
+        x_j=\frac{\left\lvert \mathbf{A}_j\right\rvert}{\left\lvert \mathbf{A}\right\rvert},j=1,2,\dots,n.
+    \end{equation*}
+
+    $\left\lvert \mathbf{A}_j\right\rvert$是用常数列代替系数行列式中的第$j$列元素得到的行列式.
+
+    当常数列都为零时,该线性方程组称为齐次线性方程组.当$\left\lvert \mathbf{A}\right\rvert \neq 0$时,齐次线性方程组仅有零解.
+
+    齐次线性方程组有非零解的充分必要条件是其系数行列式等于零,即$\left\lvert \mathbf{A}\right\rvert =0$
+    \begin{gather*}
+        \vert \mathbf{A} \vert \neq 0 \iff \text{$\mathbf{A}$可逆} \iff \mathbf{A}^{-1}=\frac{1}{\left\lvert \mathbf{A} \right\rvert}\mathbf{A}^*\\
+        \iff \text{线性方程组有唯一解} \iff \text{对应的齐次线性方程组仅有零解}
+    \end{gather*}
+\end{theorem}
+
+\begin{ttheorem}
+    齐次线性方程组
+    \begin{equation*}
+        \begin{cases}
+            a_{11}x_1+a_{12}x_2+\dotsm+a_{1n}x_n= 0 \\
+            a_{21}x_1+a_{22}x_2+\dotsm+a_{2n}x_n= 0 \\
+            \dots \\
+            a_{m1}x_1+a_{m2}x_2+\dotsm+a_{mn}x_n= 0 \\
+        \end{cases}
+    \end{equation*}
+    有非零解的充分必要条件是$r(\mathbf{A})<n$.当$r(\mathbf{A})=n$时,齐次线性方程组仅有零解.
+\end{ttheorem}
+
+\begin{ttheorem}
+    在齐次线性方程组中,若$m<n$则该方程组有非零解.
+\end{ttheorem}
+
+\begin{ttheorem}
+    一个一般的线性方程组
+    \begin{equation*}
+        \begin{cases}
+            a_{11}x_1+a_{12}x_2+\dotsm+a_{1n}x_n= b_1 \\
+            a_{21}x_1+a_{22}x_2+\dotsm+a_{2n}x_n= b_2 \\
+            \dots \\
+            a_{m1}x_1+a_{m2}x_2+\dotsm+a_{mn}x_n= b_m \\
+        \end{cases}
+    \end{equation*}
+    记$\alpha_j=(a_{1j},a_{2j},\dots,a_{mj},),j=1,2,\dots,n,\beta=(b_1,b_2,\dots,b_m)^\mathrm{T}$,于是方程组可以写成如下形式
+    \begin{equation*}
+        x_1\alpha_1+x_2\alpha_2+\dots+x_n\alpha_n=\beta
+    \end{equation*}
+    此式称为线性方程组的向量形式.
+
+    于是,线性方程组有解的充分必要条件是向量$\beta$可以由向量组$\alpha_1,\alpha_2,\dots,\alpha_n$线性表示.如果其有唯一解,表示法唯一；如果其有无穷多解,表示法不唯一.
+\end{ttheorem}
+
+根据上述定理,我们可以将非齐次线性方程组写成向量形式,即
+\begin{equation*}
+    (\alpha_1,\alpha_2,\dots,\alpha_n)
+    \begin{pmatrix}
+    x_1\\
+    x_2\\
+    \vdots\\
+    x_n\\
+    \end{pmatrix}=
+    \begin{pmatrix}
+    b_1\\
+    b_2\\
+    \vdots\\
+    b_n\\
+    \end{pmatrix} \quad
+    \text{或} \quad
+    (\alpha_1,\alpha_2,\dots,\alpha_n)
+    x=\beta
+\end{equation*}
+
+对于$(\alpha_1,\alpha_2,\dots,\alpha_n)x=\beta \implies (\alpha_1x,\alpha_2x,\dots,\alpha_nx)
+=\beta$,由于方程组系数矩阵的秩,就等于系数矩阵中列向量组的秩,前者表示方程组中不重复的方程个数,后者则表明了方程中非自由变量的个数.我们可以用列向量组的极大无关组把自由变量所对应的列向量线性表示.所以我们找到了列向量组中的极大无关组,就找到了线性方程组中的非自由变量.
+
+也就是说,线性方程组的系数矩阵中,行向量组表明了不同方程之间的关系,而列向量组表明了未知量之间的关系.
+
+\begin{examp}{设$\mathbf{A}=(\alpha_1,\alpha_2,\alpha_3,\alpha_4)$是四阶矩阵,$\eta_1=(1,-2,3,1)^{\mathbf{T}}$和$\eta_2=(0,1,0,-2)^{\mathbf{T}}$是$\mathbf{Ax}=0$的基础解系,则$\alpha_2,\alpha_4$是否线性相关？}
+
+    \jie 代入$\eta_2,\alpha_2=2\alpha_4$,故他们线性相关.
+\end{examp}
+
+\begin{ttheorem}
+    非自由变量所对应的列向量组是系数矩阵列向量组中的极大无关组.
+\end{ttheorem}
+
+\begin{ttheorem}
+    齐次线性方程组
+    \begin{equation*}
+        \begin{cases}
+            a_{11}x_1+a_{12}x_2+\dotsm+a_{1n}x_n= 0 \\
+            a_{21}x_1+a_{22}x_2+\dotsm+a_{2n}x_n= 0 \\
+            \dots \\
+            a_{m1}x_1+a_{m2}x_2+\dotsm+a_{mn}x_n= 0 \\
+        \end{cases}
+    \end{equation*}
+    其向量形式为
+    \begin{equation*}
+        x_1\alpha_1+x_2\alpha_2+\dots+x_n\alpha_n=0
+    \end{equation*}
+    若方程组仅有零解,则向量组$\alpha_1,\alpha_2,\dots,\alpha_n$线性无关；若方程组有非零解,则向量组$\alpha_1,\alpha_2,\dots,\alpha_n$线性相关.
+\end{ttheorem}
+
+\begin{ttheorem}
+    若非齐次线性方程组有唯一解,那么其导出组仅有零解；若有无穷多解,则其导出组有非零解.
+\end{ttheorem}
+
+\subsubsection{线性方程组解的结构}
+如果$\eta_1,\eta_2,\dots,\eta_s$是齐次线性方程组的解,则$\eta_1,\eta_2,\dots,\eta_s$的线性组合$c_1\eta_1,c_2\eta_2,\dots,c_s\eta_s$也是它的解.
+\begin{definition}
+    如果$\eta_1,\eta_2,\dots,\eta_s$是齐次线性方程组的解向量组的一个极大无关组,则称$\eta_1,\eta_2,\dots,\eta_s$是方程组的一个基础解系.
+\end{definition}
+
+\begin{ttheorem}
+    如果齐次线性方程组的系数矩阵的秩$r(\mathbf{A})=r<n$,则方程组的基础解系存在,且它任一基础解系中解的个数为$n-r$
+\end{ttheorem}
+
+在解线性方程组的过程中,系数矩阵的秩代表的是这个方程组含有的、与其他方程不重复的方程的个数,这指出了方程能解出的变量的个数,而剩下的自由变量有$n-r$个,这就是基础解系中解的个数.
+
+将非齐次线性方程组$\mathbf{Ax=b}$的常数项换为零,称$\mathbf{Ax=0}$为它的导出组.
+
+若$\gamma$是非齐次线性方程组的一个解,而$\eta$是它的导出组的一个解,则$\gamma+\eta$也是方程组的一个解.
+
+若$\gamma_1,\gamma_2$是非齐次线性方程组$\mathbf{Ax=b}$的两个解,则$\gamma_1-\gamma_2$是导出组$\mathbf{Ax=0}$的解.
+
+非齐次线性方程组中线性无关的解向量的个数是$n-r+1$.
+
+\begin{ttheorem}
+    如果$\gamma_0$是非齐次线性方程组的一个解,$\eta$是其导出组的全部解,即$\eta=c_1\eta_1,c_2\eta_2,\dots,c_{n-r}\eta_{n-r}$,其中$\eta=\eta_1,\eta_2,\dots,\eta_{n-r}$是导出组的一个基础解系,则方程组的全部解为
+    \begin{equation*}
+        \gamma=\gamma_0+\eta=\gamma_0+c_1\eta_1+c_2\eta_2+\dots+c_{n-r}\eta_{n-r}
+    \end{equation*}
+\end{ttheorem}
+
+用矩阵的初等变换解线性方程组,要把系数矩阵化为行最简型.
+
+取非齐次线性方程组特解的时候,可以使$n-r$个自由变量都为0.这些变量在导出组中分别取0和1.
+
+\subsection{矩阵的特征值和特征向量}
+\begin{definition}
+    设$\mathbf{A}$为$n$阶方阵,若有数$\lambda_0$和$n$维非零列向量$\alpha$使得
+    \begin{equation*}
+        \mathbf{A}\alpha=\lambda_0\alpha
+    \end{equation*}
+    则称$\lambda_0$为$\mathbf{A}$的一个特征值,$\alpha$为$\mathbf{A}$的属于$\lambda_0$的一个特征向量,简称为$\mathbf{A}$的特征向量.
+\end{definition}
+
+\begin{examp}{若$\mathbf{A}$为3阶矩阵,$\mathbf{A}^2+\mathbf{A}=2\mathbf{E},\left\lvert \mathbf{A}\right\rvert =4$,求$\mathbf{A}$的特征值}
+    
+    \jie $\mathbf{A}^2+\mathbf{A}=2\mathbf{E}$两边同时右乘$\alpha$,由特征值的定义$\mathbf{A}\alpha=\lambda\alpha$可得：$\mathbf{A}^2\alpha+\mathbf{A}\alpha=2\mathbf{E}\alpha \implies \mathbf{A}(\lambda\alpha)+\lambda\alpha=2\alpha \implies \lambda(\mathbf{A}\alpha)+\lambda\alpha=2\alpha \implies (\lambda^2+\lambda-2)\alpha=0$,故$\lambda=1,-2$,又$\left\lvert \mathbf{A}\right\rvert =4$,故还有一个特征值必然为$-2$.
+\end{examp}
+
+如果二阶实对称矩阵的行列式小于零,即$\left\lvert \mathbf{A}\right\rvert <0$,那么它的特征值乘积小于零,所以它一定有两个不同的特征值,而且是一正一负.
+
+\begin{definition}
+    设$\mathbf{A}=(a_{ij})$为$n$阶方阵,矩阵$\lambda\mathbf{I}-\mathbf{A}$为$\mathbf{A}$的特征矩阵,其行列式
+    \begin{equation*}
+        \left\lvert \lambda\mathbf{I}-\mathbf{A}\right\rvert =
+        \begin{vmatrix}
+            \lambda-a_{11}   &   -a_{12}   &   \dots   &   -a_{1n}   \\
+            -a_{21}   &   \lambda-a_{22}   &   \dots   &   -a_{2n}   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            -a_{n1}   &   -a_{n2}   &   \dots   &   \lambda-a_{nn}   \\
+            \end{vmatrix}
+    \end{equation*}
+    称为$\mathbf{A}$的特征多项式,称$\left\lvert \lambda\mathbf{I}-\mathbf{A}\right\rvert $为$\mathbf{A}$的特征方程
+\end{definition}
+
+
+$\lambda_1,\dots,\lambda_n$为$\mathbf{A}$的特征值,则
+\begin{enumerate}
+    \item $\vert \mathbf{A} \vert =\lambda_1\lambda_2\dots\lambda_n $
+    \item $\mathrm{tr}(\mathbf{A})=\lambda_1+\lambda_2+\dots+\lambda_n$
+    \item $k\mathbf{A}$的特征值为$k\lambda_1,\dots,k\lambda_n$
+    \item $(\mathbf{A}+k\mathbf{I})$的特征值为$\lambda_1+k,\dots,\lambda_n+k$
+    \item $\mathbf{A}^k$的特征值为$\lambda_1^k,\dots,\lambda_n^k$
+    \item $\mathbf{A}^{-1}$的特征值为$\lambda_1^{-1},\dots,\lambda_n^{-1}$
+\end{enumerate}
+
+\begin{examp}{已知$\mathbf{A}$是三阶矩阵,特征值为$-1,0,4$,且$\mathbf{A}+\mathbf{B}=2\mathbf{I}$,求$\mathbf{B}$的特征值.}
+
+    \jie 
+    $3,2,-2$
+\end{examp}
+
+\begin{examp}{若$\mathbf{A}$为$n$阶非零方阵,$\mathbf{A}^2=\mathbf{O}$,则$\mathbf{A}+\mathbf{I}$的特征值是多少.}
+    
+    \jie $\mathbf{A}^2=\mathbf{O}$而且$\mathbf{O}$只有零特征值,故$\mathbf{A}^2$只有零特征值,故$\mathbf{A}$只有零特征值,那么即可得$\mathbf{A}+\mathbf{I}$的特征值全为1.
+\end{examp}
+
+\begin{ttheorem}
+    设$\alpha_1,\alpha_2,\dots,\alpha_t$为$n$阶方阵对应于互不相同的特征值$\lambda_1,\lambda_2,\dots,\lambda_t$的特征向量,则向量组$\alpha_1,\alpha_2,\dots,\alpha_t$线性无关.
+\end{ttheorem}
+
+
+\begin{examp}{若$\vert 2\mathbf{A}-3I\vert =0$,则$\mathbf{A}$必有一个特征值为（\quad）}
+
+    \jie 
+    设线性方程组$(2\mathbf{A}-3I)x=0$,那么该方程组有非零解,设为$\xi$,则$2\mathbf{A} \xi -3I \xi =0$,故有$\mathbf{A} \xi =\frac{3}{2}\xi$,所以$\mathbf{A}$必有一个特征值为$\frac{3}{2}$.
+\end{examp}
+
+\subsubsection{矩阵的对角化}
+
+\begin{definition}
+    若$n$阶矩阵$\mathbf{A}$与$n$阶对角矩阵$\varLambda$相似,则称$\mathbf{A}$可以对角化,$\varLambda $是$\mathbf{A}$的相似标准型.
+\end{definition}
+
+从定义可以看出,将矩阵对角化的过程,实际上就是找到矩阵$\mathbf{P}$,使得$\mathbf{P}^{-1}\mathbf{A}\mathbf{P}=\varLambda$.这个$\mathbf{P}$就是由$\mathbf{A}$的特征向量所组成的矩阵,$\varLambda $是由$\mathbf{A}$特征值组成的对角矩阵.
+
+\begin{ttheorem}
+    $n$阶矩阵$\mathbf{A}$可以对角化的充分必要条件为$\mathbf{A}$有$n$个线性无关的特征向量.
+\end{ttheorem}
+
+\begin{ttheorem}
+    若$n$阶矩阵$\mathbf{A}$有$n$个相异特征值,则$\mathbf{A}$可以对角化.
+\end{ttheorem}
+
+当特征值为二重根时,特征向量可能有一个,也可能由两个线性无关的向量组成.矩阵$\mathbf{A}$可以对角化的充分必要条件是特征值有几个相同的特征值就要有几个对应的线性无关的特征向量.
+
+\begin{ttheorem}
+    实对称矩阵一定可以相似对角化.
+\end{ttheorem}
+
+\begin{ttheorem}
+    实对称矩阵的属于不同特征值对应的特征向量相互正交.
+\end{ttheorem}
+
+\begin{ttheorem}
+    设$\mathbf{A}$为$n$阶实对称矩阵,则必存在正交阵$\mathbf{Q}$,使得$\mathbf{Q}^{-1}\mathbf{A}\mathbf{Q}=\mathbf{Q}^\mathrm{T}\mathbf{A}\mathbf{Q}=\varLambda $.
+\end{ttheorem}
+
+\subsection{二次型}
+\begin{definition}
+    $n$个变量的一个二次齐次多项式
+    \begin{gather*}
+        f(x_1,x_2,\dots,x_n)=a_{11}x_1^2+2a_{12}x_1x_2+2a_{13}x_1x_3+\dots+2a_{1n}x_1x_n\\
+        \phantom{f(x_1,x_2,\dots,x_n)=a_{11}x_1^2}+a_{22}x_2^2+2a_{23}x_2x_3+\dots+2a_{2n}x_2x_n\\
+        \phantom{f(x_1,x_2,\dots,x_n)=a_{11}x_1^2+2a_{12}x_1x_2+2a_{13}x_1x_3+\dots}+\dots+a_{nn}x_n^2.
+    \end{gather*}
+    称为$n$个变量的二次型,系数均为实数时,称为$n$元实二次型.它可以写为矩阵形式：
+    \begin{gather*}
+        f(x_1,x_2,\dots,x_n)=(x_1,x_2,\dots,x_n)\begin{pmatrix}
+            a_{11}   &   a_{12}   &   \dots   &   a_{1n}   \\
+            a_{21}   &   a_{22}   &   \dots   &   a_{2n}   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            a_{n1}   &   a_{n2}   &   \dots   &   a_{nn}   \\
+        \end{pmatrix}
+        \begin{pmatrix}
+            x_1  \\
+            x_2  \\
+            \vdots  \\
+            x_n  \\
+        \end{pmatrix}\\
+        =x^\mathrm{T}\mathbf{A}x
+    \end{gather*}
+    其中$\mathbf{A}$是对称矩阵,称为二次型的对应矩阵.
+\end{definition}
+\subsubsection{化二次型为标准型}
+\begin{definition}
+    若二次型$f(x_1,x_2,\dots,x_n)$只有平方项,没有混合项（即混合项的系数全为零）,则称二次型为标准型.
+    \begin{gather*}
+        f(x_1,x_2,\dots,x_n)=a_{11}x_1^2+a_{22}x_2^2+\dots+a_{nn}x_n^2\\
+        =(x_1,x_2,\dots,x_n)
+        \begin{pmatrix}
+            a_{11}   &      &      &      \\
+               &   a_{22}   &      &      \\
+               &      &   \ddots   &      \\
+               &      &      &   a_{nn}   \\
+        \end{pmatrix}
+        \begin{pmatrix}
+            x_1  \\
+            x_2  \\
+            \vdots  \\
+            x_n  \\
+        \end{pmatrix}\\
+        =x^\mathrm{T}\mathbf{A}x
+    \end{gather*}
+    在二次型的标准型中,若平方项的系数$a_i$只是$1,-1,0$,则称之为二次型的规范型.
+\end{definition}
+规范型只要在标准型的基础上做些调整即可获得:$\lambda_iy_i^2=(\sqrt{\lambda_i}y_i)^2$
+
+\begin{definition}
+    二次型$x^\mathrm{T}\mathbf{A}x$矩阵$\mathbf{A}$的秩称为二次型的秩.
+\end{definition}
+
+化二次型为标准型的过程,实际上就是找到与二次型的对应矩阵合同的对角矩阵,我们希望有$\mathbf{Q}^\mathrm{T}\mathbf{A}\mathbf{Q}=\varLambda $,所以第一时间应该想起正交矩阵,因为$\mathbf{Q}^{-1}\mathbf{A}\mathbf{Q}=\mathbf{Q}^\mathrm{T}\mathbf{A}\mathbf{Q}=\varLambda $.我们可以将二次型的对应矩阵相似对角化后,把可逆阵$\mathbf{P}$化为正交矩阵$\mathbf{Q}$.
+
+\begin{ttheorem}
+    对于任意一个$n$元二次型$f(x_1,x_2,\dots,x_n)=x^\mathrm{T}\mathbf{A}x$,必存在正交变换$x=\mathbf{Q}y$,其中$\mathbf{Q}$是正交阵,化二次型为标准型.
+\end{ttheorem}
+
+由于$\mathbf{A}$是实对称矩阵,故存在正交阵$\mathbf{Q}$,使得$\mathbf{Q}^{-1}\mathbf{A}\mathbf{Q}=\mathbf{Q}^\mathrm{T}\mathbf{A}\mathbf{Q}=\varLambda $,注意到如果令$x=\mathbf{Q}y$,则
+
+\begin{gather*}
+    f(x_1,x_2,\dots,x_n)=x^\mathrm{T}\mathbf{A}x=(\mathbf{Q}y)^\mathrm{T}\mathbf{A}(\mathbf{Q}y)=y^\mathrm{T}\mathbf{Q}^\mathrm{T}\mathbf{A}\mathbf{Q}y=y^\mathrm{T}\mathbf{\varLambda}y\\
+    =y^\mathrm{T}
+    \begin{pmatrix}
+        \lambda_1   &      &      &      \\
+           &   \lambda_2   &      &      \\
+           &      &   \ddots   &      \\
+           &      &      &   \lambda_n   \\
+    \end{pmatrix}y
+    =\lambda_1y_1^2+\lambda_2y_2^2+\dots+\lambda_ny_n^2
+\end{gather*}
+
+在此过程中,标准型平方项的系数就是二次型对应矩阵的特征值.
+
+除了正交变换,对于任意一个二次型,我们总是可以用配方法化为标准型.所以有下面的定理：
+
+\begin{ttheorem}
+    对于任意一个$n$元二次型$f(x_1,x_2,\dots,x_n)=x^\mathrm{T}\mathbf{A}x$,都可以通过可逆线性变换$x=\mathbf{C}y$,其中$\mathbf{C}$是可逆阵,化二次型为标准型.
+\end{ttheorem}
+
+\begin{ttheorem}
+    满秩线性变换$x=\mathbf{C}y$将二次型$f(x_1,x_2,\dots,x_n)=x^\mathrm{T}\mathbf{A}x$变换为与其具有相同秩的二次型$y^\mathrm{T}\mathbf{C}^\mathrm{T}\mathbf{A}\mathbf{C}y=y^\mathrm{T}\mathbf{B}y$.
+\end{ttheorem}
+
+这个定理揭示了合同矩阵之间的关系.二次型经过线性变换$x=\mathbf{C}y$后,新的二次型$y^\mathrm{T}\mathbf{B}y$仍可以经过线性变换$z=\mathbf{D}y$化为标准型.但我们可以将新的二次型化为标准型的过程看成是原二次型的另一种线性变换$x=\mathbf{C}\mathbf{D}z$.所以如果两个矩阵合同,那么他们一定可以化为同一个二次型,于是受到惯性定理的约束.
+
+\begin{definition}
+    在二次型$x^\mathrm{T}\mathbf{A}x$的标准型中,正平方项的个数$p$称为二次型的正惯性指数,负平方项的个数$q$称为二次型的负惯性指数.
+\end{definition}
+
+\begin{ttheorem}[（惯性定理）]
+    对一个二次型$f(x_1,x_2,\dots,x_n)=x^\mathrm{T}\mathbf{A}x$经坐标变换化为标准型,其正惯性指数和负惯性指数都是唯一确定的.
+\end{ttheorem}
+
+存在多种线性变换可以化二次型为标准型,惯性定理为我们揭示了二次型的多个标准型中共有的特征.同时,考虑到正交变换后,标准型中平方项的系数就是对角矩阵中的元素,也就是原二次型矩阵的特征值,所以我们可以得到一个结论：二次型的对应矩阵中,正的特征值的个数就是二次型的正惯性指数.
+
+\begin{ttheorem}
+    二次型的对应矩阵中,正的特征值的个数就是二次型的正惯性指数,负的特征值的个数就是二次型的负惯性指数.
+\end{ttheorem}
+
+\begin{examp}{与矩阵$\mathbf{A}=
+    \begin{pmatrix}
+1   &   2   &   0   \\
+2   &   1   &   0   \\
+0   &   0   &   2   \\
+\end{pmatrix}$合同的是
+
+A.$\begin{pmatrix}
+1   &      &      \\
+   &   1   &      \\
+   &      &   0   \\
+\end{pmatrix}$,
+B.$\begin{pmatrix}
+1   &      &      \\
+   &   1   &      \\
+   &      &   -1   \\
+\end{pmatrix}$,
+C.$\begin{pmatrix}
+1   &      &      \\
+   &   -1   &      \\
+   &      &   -1   \\
+\end{pmatrix}$,
+D.$\begin{pmatrix}
+1   &      &      \\
+   &   -1   &      \\
+   &      &   0   \\
+\end{pmatrix}$}
+
+\jie 把$\mathbf{A},\mathbf{B}$看成两个二次型的对应矩阵,两矩阵合同,由惯性定理,矩阵$\mathbf{A}$应有和$\mathbf{B}$一样的正负惯性指数.由于矩阵$\mathbf{A}$的特征值为2,3,-1,故正惯性指数为2,负惯性指数为1,故选B项.
+\end{examp}
+
+各种将二次型化为标准型的线性变换都是满秩的,但是二次型对应矩阵和标准型的对应矩阵可能有零行(可以参考原二次型对应矩阵有零特征值的情况).
+
+\subsubsection{正定二次型}
+\begin{definition}
+    若对于任意非零向量$x=(x_1,x_2,\dots,x_n)^\mathrm{T}$,恒有
+    \begin{gather*}
+        f(x_1,x_2,\dots,x_n)=x^\mathrm{T}\mathbf{A}x>0
+    \end{gather*}
+    则称二次型为正定二次型,对应矩阵称为正定矩阵.
+\end{definition}
+
+\begin{ttheorem}
+    可逆线性变换不改变二次型的正定性.
+\end{ttheorem}
+
+这个定理给我们判断一个二次型的正定性提供了一个思路,只要将一个二次型化为标准型,若其平方项的系数都大于零,那么这个二次型就是正定二次型.
+
+\begin{ttheorem}[（$f$正定的充要条件）]
+    \begin{gather*}
+        f(x_1,x_2,\dots,x_n)=x^\mathrm{T}\mathbf{A}x\text{正定}\\
+        \iff \mathbf{A} \text{的正惯性指数}p=n\\
+        \iff \mathbf{A}\simeq \mathbf{I}, \text{即存在可逆阵$\mathbf{C}$,使得}\mathbf{C}^\mathrm{T}\mathbf{A}\mathbf{C}=\mathbf{I}.\text{(正定矩阵一定合同于单位矩阵)}\\
+        \iff \mathbf{A}=\mathbf{D}^\mathrm{T}\mathbf{D},\text{其中$\mathbf{D}$是可逆阵}\\
+        \iff \mathbf{A}\text{的全部特征值}\lambda_i>0,i=1,2,\dots,n\\
+        \iff \mathbf{A}\text{的全部顺序主子式大于零},\\
+        \text{即对}\mathbf{A}=
+        \begin{pmatrix}
+            a_{11}   &   a_{12}   &   \dots   &   a_{1n}   \\
+            a_{21}   &   a_{22}   &   \dots   &   a_{2n}   \\
+            \vdots   &   \vdots   &   \ddots   &   \vdots   \\
+            a_{n1}   &   a_{n2}   &   \dots   &   a_{nn}   \\
+        \end{pmatrix}
+        ,a_{11}>0,\begin{vmatrix}
+        a_{11}   &   a_{12}   \\
+        a_{21}   &   a_{22}   \\
+        \end{vmatrix}
+        >0,\dots,
+        \left\lvert \mathbf{A}\right\rvert >0
+    \end{gather*}
+\end{ttheorem}
+
+若二次型$f(x_1,x_2,\dots,x_n)=x^\mathrm{T}\mathbf{A}x$正定,则
+\begin{enumerate}
+    \item $\mathbf{A}$的主对角元素$a_{ii}>0$
+    \item $\mathbf{A}$的行列式$\left\lvert \mathbf{A}\right\rvert >0$
+\end{enumerate}
+
+
+

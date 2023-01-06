@@ -1,0 +1,770 @@
+
+\section{概率论与数理统计}
+\subsection{随机事件及其概率}
+\subsubsection{事件间的关系}
+\begin{enumerate}
+    \item 包含
+    
+    如果事件$A$发生必然导致事件$B$发生,则称事件$B$包含事件$A$,记作$A\subset B$
+
+    符号$\subset $可以看成小于号$<$,表示范围的大小,方便记忆.
+    \item 和
+    
+    两个事件$A$与$B$中至少有一个发生,称为事件$A$与$B$的和,记作$A+B$或$A\cup B$
+    \item 积
+    
+    两个事件$A$与$B$同时发生,称为事件$A$与$B$的积,记作$AB$或$A\cap B$
+    \item 互不相容
+    
+    如果事件$A$与$B$不能同时发生,则称事件$A$与$B$互不相容或互斥,此时满足$AB=\varnothing $,若A与B互不相容,则有\begin{gather*}
+        P(AB)=0,\\
+        P(A+B)=P(A)+P(B),\\
+        A\subset \overline{B}
+    \end{gather*}
+    \item 对立（逆）
+    
+    如果两个事件$A$与$B$满足$A+B=\varOmega,AB=\varnothing $,则称事件$A$是事件$B$的对立事件或逆事件,$\overline{A}=B$或$\overline{B}=A$.要注意的是:
+    \begin{gather*}
+        P(\overline{A})=1-P(A)\\
+        \text{对立}\Rightarrow \text{互不相容}\\
+        \overline{A}\cdot \overline{B}\neq \overline{AB},\overline{ABC}\neq \overline{A}+\overline{B}+\overline{C}\\
+    \end{gather*}
+\end{enumerate}
+
+事件之间只有一部分重合并不代表不独立,判断事件间的独立性只能通过具体计算得出.当然包含事件必然不是独立的.
+\subsubsection{事件的运算律}
+\begin{enumerate}
+    \item 分配律
+    \[(A+B)C=AC+BC\]
+    \item 对偶原理
+    \[\overline{A+B}=\overline{A}\cdot\overline{B}\]
+    \[\overline{AB}=\overline{A}+\overline{B}\]
+    \item 若$A \implies B$,则$\overline{B} \implies \overline{A}$.
+    \item 若$A+B\subset C$,则$AB\subset C$.
+    \item $AB\subset A+B$
+\end{enumerate}
+\subsubsection{随机事件的概率公式}
+设$A$,$B$为任意两个随机事件
+\begin{itemize}
+\item 若$A\supset B$,则有
+\begin{gather*}
+    P(A-B)=P(A)-P(B)\\
+    P(AB)=P(B)
+\end{gather*}
+\item 若$A,B$互斥则有
+\begin{equation*}
+    P(A+B)=P(A)+P(B)
+\end{equation*}
+\item 减法公式
+\[P(A \overline{B})=P(A-B)=P(A-AB)=P(A)-P(AB)\]
+\item 加法公式
+\begin{gather*}
+    P(A+B)=P(A)+P(B)-P(AB)\\
+    P(A+B+C)=P(A)+P(B)+P(C)\\
+    \phantom{P(A+B+C)=}-P(AB)-P(AC)-P(BC)+P(ABC)
+\end{gather*}
+\end{itemize}
+
+\begin{ttheorem}
+    若事件$A$与$B$独立,则$A$与$\overline{B} $,$\overline{A} $与$B$,$\overline{A} $与$\overline{B} $也相互独立.
+\end{ttheorem}
+
+设事件$A,B$相互独立,则有：
+\begin{enumerate}
+    \item $P(AB)=P(A)\times P(B)$
+    \item $P(A\vert B)=P(A)$
+    \item $P(A\vert B)=P(A\vert \overline{B})$
+    \item $P(A+B)=1-P(\overline{A+B} )=1-P(\overline{A}\cdot\overline{B} )=1-P(\overline{A} )P(\overline{B} )$
+    \item $P(A-B)=P(A\overline{B} )=P(A)P(\overline{B} )$
+\end{enumerate}
+
+\begin{definition}[条件概率]
+    \[P(A\vert B)=\frac{P(AB)}{P(B)}\]
+
+    称$P(A\vert B)$为事件$B$发生的条件下$A$发生的条件概率
+\end{definition}
+
+条件概率的性质:
+    \begin{itemize}
+    \item $P(\overline{A}\vert B)=1-P(A\vert B)$
+    \item $P(A_1+A_2\vert B)=P(A_1\vert B)+P(A_2\vert B)-P(A_1A_2\vert B)$
+    \item 乘法定理：设$P(B)>0$,则有
+    \[P(AB)=P(B)\cdot P(A\vert B)\]
+    设$P(A)>0$,则有
+    \[P(AB)=P(A)\cdot P(B\vert A)\]
+        \begin{gather*}
+            P(A_1A_2A_3\cdots A_n)=P(A_1)P(A_2\vert A_1)P(A_3\vert A_1A_2)\\
+            \phantom{P(A_1A_2A_3\cdots A_n)=}\cdots P(A_n\vert A_1A_2A_3\cdots A_{n-1})
+        \end{gather*}
+    \end{itemize}
+\begin{ttheorem}[(全概率公式)]
+    设事件$A_1,A_2,\dots,A_n$是样本空间$\varOmega $的一个分割,他们两两不相容且$\sum_{i=1}^{\infty} A_i=\varOmega$,则对任意一个事件$B$有
+    \begin{equation*}
+        P(B)=\sum_{i=1}^{\infty} P(BA_i)=\sum_{i=1}^{\infty} P(A_i)P(B\vert A_i).
+    \end{equation*}
+\end{ttheorem}
+\begin{theorem}[Bayes公式]
+    设$A_1,A_2,\dotsc,A_i,\dotsc$是样本空间$\varOmega $的一个完备事件组,且$P(A_i)>0,i=1,2,\dotsc$.对任一事件$B$,若$P(B)>0$,则有
+    \begin{equation*}
+        P(A_i\vert B)=\frac{P(A_i)P(B\vert A_i)}{\sum\limits^{\infty}_{i=1}P(A_i)P(B\vert A_i)}
+    \end{equation*}
+
+    可以写成
+    \begin{equation*}
+        P(A_i B)=\frac{P(A_iB)}{\sum\limits^{\infty}_{i=1}P(A_iB)}
+    \end{equation*}
+\end{theorem}
+\begin{liti}
+    \begin{enumerate}[label=\protect\enumlabel{\thetcbcounter\arabic*}, leftmargin=0mm]
+    \item （2006·湖北·14）安排5名歌手的演出顺序时,要求某名歌手不第一个出场,另一名歌手不最后一个出场,不同排法的种数是（用数字作答）.
+    
+    答：分类讨论.
+
+    当不最后一个出场的歌手第一个出场时,原先不能第一个出场的歌手肯定不会出现在第一个.此时排法有$A_4^4=24$种.
+
+    当不最后一个出场的歌手不第一个出场时,第一个位置只能有三种选择,第二个位置有三种选择,第三个位置有两种选择,第四个位置有一种选择,最后一个位置有三种选择,此时排法有$C_3^1\times A_3^3 \times C_3^1(3\times 3\times 2\times 1\times 3)=54$种.
+
+    所以总排法有$24+54=78$种.
+
+    \item （2010·湖北·8）现安排甲、乙、丙、丁、戊5名同学参加上海世博会志愿者服务活动,每人从事翻译、导游、礼仪、司机四项工作之一,每项工作至少有一人参加.甲、乙不会开车但能从事其他三项工作,丙、丁、戊都能胜任四项工作,则不同安排方案的种数是（\quad）.
+    
+    \onech{54}{90}{126}{152}
+    答：不平均分配问题$+$分类讨论
+    
+    五名同学安排四项工作,一定会有一项工作多出一名同学,也就是三项一名同学的工作和一项两名同学的工作的排法问题.特殊的地方在于,甲乙是不会开车的,所以如果多出甲乙是不能给他们安排司机的.所以要进行分类讨论.
+
+    多出一名同学的工作是司机,此时,两名司机肯定只能在丙丁戊中选,甲乙从事另外三项工作,一共有$A_3^3\times C_3^2=18$种.
+
+    多出一名同学的工作不是司机,此时,司机只需要在丙丁戊中选一名,一共有$A_3^3\times C_4^2\times C_3^1=108$种.
+
+    所以一共有$18+108=126$种.
+
+    \item （2009·湖北·5）将甲、乙、丙、丁四名学生分到三个不同的班,每个班至少分到一名学生,且甲、乙两名学生不能分到同一个班,则不同分法的种数为（\quad）.
+    
+    \onech{18}{24}{30}{36}
+    答：不平均分配问题
+
+    甲、乙、丙、丁四名学生分到三个不同的班,一定会有一个班多出一个学生,排列就变成了两个一个人的班级和一个两个人的班级的排法问题.每个班至少分到一名学生的分法一共有$A_3^3\times C_4^2=36$种,因为甲乙两名学生不能分到同一个班,所以四个人中选择两人同班的分法要减少一种,此时一共有$A_3^3\times (C_4^2-1)=30$种.
+    \end{enumerate}
+\end{liti}
+
+\subsection{常见的几种分布}
+本章常用的几个积分公式：
+\begin{gather*}
+    \int_{-\infty}^{+\infty} \mathrm{e} ^{-x^2} \,\mathrm{d}x =\sqrt{\pi}\\
+    \int_{0}^{+\infty} x^ne^{-x} \,\mathrm{d}x =n!\\
+    \sum_{k=0}^{\infty} k\cdot \frac{\lambda^k}{k!}e^{-\lambda}=\lambda\\
+    \sum_{k=0}^{\infty} \frac{\lambda^k}{k!}e^{-\lambda}=1
+\end{gather*}
+第三个式子用来计算Poisson分布的期望.
+
+分布函数的性质：
+\begin{enumerate}
+    \item $0 \leqslant F(x) \leqslant 1$
+    \item $\lim_{x \to -\infty} F(x)=0,\lim_{x \to +\infty} F(x)=1$
+    \item $F(x)$是单调非减函数
+    \item $F(x)$是右连续的,即$P(X \leqslant x)=F(x)=P(X<x)+P(X=x)$
+    \item $P(X=x)=F(x)-F(x-0)=0$,故连续型随机变量取个别值的概率为0.$F(x)=P(X \leqslant x)$这个等号对于连续性随机变量来说无关紧要,但对于离散型随机变量而言$F(x)$包含了$P(X=x)$的情况.
+\end{enumerate}
+
+连续型分布函数一般写成$f(x)$,离散型分布函数一般写成$P(X=x_i)$
+
+注意,$A=P(X \leqslant x),B=P(Y \leqslant y),P(X \leqslant x,Y \leqslant y)=P(AB),P(X \leqslant x\text{或}Y \leqslant y)=P(A+B)$
+\subsubsection{一维离散型随机变量}
+概率分布的性质：
+\begin{enumerate}
+    \item $p_k \geqslant 0,k=1,2,\dots,n;$
+    \item $\sum_{k=1}^{+\infty} p_k=1$
+\end{enumerate}
+
+常用分布：
+\begin{enumerate}[fullwidth,itemindent=2em,listparindent=2em]
+\item 二项分布$X\sim B(n,p)$
+
+满足$B(k;n,p)=C^k_np^k(1-p)^{n-k}(k=0,1,2,3,\dots$),当$k=[(n+1)\cdot p]$时,二项分布取到最大值,此时$k$为二项分布随机变量的最可能值,即$n$重Bernoulli实验最可能成功次数.二项分布的$EX=np$,$DX=np(1-p)$.
+
+二项分布可以用Poisson分布近似,若$n\to \infty$,则有$B(k;n,p)=C^k_np^k(1-p)^{n-k}=\dfrac{\lambda ^k}{k!}e^{-\lambda}$,其中$\lambda=n\cdot p$.
+
+也可以用正态分布近似,由De Moivre-Laplace中心极限定理,当$n\to \infty$,则有$X\sim N(np,np(1-p))$
+\begin{equation*}
+    \lim_{n \to \infty}P\left(\frac{\mu_n-np}{\sqrt{np(1-p)}}\leqslant x \right)=\int_{-\infty}^{x}\frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}  \,\mathrm{d} t =\varPhi (x)
+\end{equation*}
+一般在$p$较小时用Poisson分布近似较好,当$np>5$和$n(1-p)>5$时用正态分布近似比较好.
+
+如果随机变量序列$X_1,X_2,\dots,X_n$独立同分布,$X_i\sim B(1,p),i=1,2,\dots,n$,那么$\sum_{i=1}^{\infty} X_i$服从二项分布,$\sum_{i=1}^{\infty} X_i \sim B(n,p)$.
+
+若$X\sim B(n_1,p),Y\sim B(n_2,p)$且$X,Y$相互独立,则$X+Y\sim B(n_1+n_2,p)$
+\item 超几何分布
+
+$P(X=k)=\dfrac{C^k_MC_{N-M}^{n-k}}{C_N^n}$,若满足$N\to \infty,M \to \infty,\dfrac{M}{N}\to p$则有$P(X=k)=\dfrac{C^k_MC_{N-M}^{n-k}}{C_N^n}=C^k_np^k(1-p)^{n-k}$
+
+\item 泊松分布
+
+随机变量X可取一切非负整数值,$P(X=k)=\dfrac{\lambda^k}{k!}e^{-\lambda},k=0,1,2,3,\dots,\lambda>0$,泊松分布$EX=\lambda$,$DX=\lambda$.
+
+注意$k$取非负整数,$\lambda>0$.
+
+若$X\sim P(\lambda_1),Y\sim P(\lambda_2)$且$X,Y$相互独立,则$X+Y\sim P(\lambda_1+\lambda_2)$
+
+\item 几何分布
+
+$X\sim G(p)$满足$P(X=k)=(1-p)^{k-1}\cdot p,k=1,2,3,\dots$
+\end{enumerate}
+
+\subsubsection{一维连续型随机变量}
+概率密度函数的性质：
+\begin{enumerate}
+    \item $0 \leqslant f(x) <1$
+    \item $\int_{-\infty}^{+\infty} f(x) \,\mathrm{d}x =1$
+    \item 对任意实数$x_1 < x_2$,有$P(x_1<X<x_2)=\int_{x_1}^{x_2} f(t) \,\mathrm{d}t $
+    \item $F'(x)=f(x)$
+    \item 由于连续型随机变量的分布函数可以表示为$F(x)=\int_{-\infty}^{x} f(t) \,\mathrm{d}t $,所以这个函数一定是一个连续函数,但概率密度函数不一定是一个连续函数.
+\end{enumerate}
+
+常用分布：
+\begin{enumerate}[fullwidth,itemindent=2em,listparindent=2em]
+    \item 均匀分布$X\sim U[a,b]$
+    
+    对应的概率密度函数和分布函数分别为\[f(x)=\begin{dcases}
+        \frac{1}{b-a}&,a\leq x\leq b,\\
+        0&,\text{其他}.
+    \end{dcases}\]和
+    $F(x)=\begin{dcases}
+        0&,x<a,\\
+        \frac{x-a}{b-a}&,a\leq x<b,\\
+        1&,x\geq b.
+    \end{dcases}$若$[c,d]\subseteq [a,b]$,则$P(c\leq x\leq d)=\dfrac{d-c}{b-a}$,$EX=\dfrac{a+b}{2}$,$DX=\dfrac{(b-a)^2}{12}$.
+    
+    \item 指数分布$X\sim E(\lambda)$
+    
+    对应的概率密度函数和分布函数分别为\[f(x)=\begin{dcases}
+        \lambda \mathrm{e} ^{-\lambda x}&,x\geq 0,\\
+        0&,x<0.
+    \end{dcases}\]和$F(x)=\begin{dcases}
+        1-\mathrm{e} ^{-\lambda x}&,x\geq 0,\\
+        0&,x<0.
+    \end{dcases}$其中$\lambda>0$,是常数.$EX=\dfrac{1}{\lambda}$,$DX=\dfrac{1}{\lambda^2}$.
+    
+    \item 正态分布$X\sim N(\mu,\sigma^2)$
+    
+    对应的概率密度函数和分布函数分别为
+    \[f(x)=\frac{1}{\sqrt{2\pi }\sigma}\mathrm{e} ^{-\frac{(x-\mu )^2}{2\sigma ^2}},-\infty<x<\infty,\mu >0,\sigma>0\]
+    和$\displaystyle F(x)=\frac{1}{\sqrt{2\pi }\sigma} \int_{-\infty}^{x} \mathrm{e} ^{-\frac{(t-\mu )^2}{2\sigma ^2}} \,dt ,-\infty<x<\infty$.
+    
+    若$\mu =0, \sigma =1$,称为标准正态分布,概率密度函数
+    \[\varphi (x)=\frac{1}{\sqrt{2\pi }}\mathrm{e} ^{-\frac{x^2}{2}}\]
+    与分布函数$\displaystyle \varPhi (x)=\frac{1}{\sqrt{2\pi }}\int^x_{-\infty}\mathrm{e} ^{-\frac{t^2}{2}}\,\mathrm{d} t $.
+    
+    一个一般正态分布的分布函数$\displaystyle F(x)=\varPhi \left(\frac{x-\mu}{\sigma}\right) $,亦即$\displaystyle \frac{X-\mu}{\sigma}\sim N(0,1)$.
+    
+    当$x>0$,$\varPhi (x)$的值查表获得；当$x<0$时,$\varPhi (x)=1-\varPhi (-x)$.
+    
+    正态分布的$EX=\mu,DX=\sigma^2$,标准正态分布的$EX=0,DX=1$.
+
+    若$X \sim N(\mu,\sigma^2)$,则$X+a\sim N(\mu+a,\sigma^2),aX\sim N(a\mu,a^2\sigma^2)$.
+
+    正态分布的对称轴为$x=\mu$,最大值为$\frac{1}{\sqrt{2\pi}\sigma}$.
+\end{enumerate}
+\subsubsection{二维随机变量}
+二维离散型随机变量的分布函数为
+\begin{equation*}
+    \sum_{x_i\leqslant x}\sum_{y_j\leqslant y}P(X=x_i,Y=y_i)=\sum_{x_i\leqslant x}\sum_{y_j\leqslant y}p_{ij}
+\end{equation*}
+
+二维连续型随机变量的概率密度函数为$P(X=x,Y=y)=f(x,y)$
+
+二维连续型随机变量的分布函数为
+\begin{equation*}
+    P(X \leqslant x,Y \leqslant y)=F(x,y)=\int_{-\infty}^{x}\int_{-\infty}^{y}f(u,v)  \,\mathrm{d} u\,\mathrm{d} v
+\end{equation*}
+他的边缘分布函数为$P(X \leqslant x)=F(x,+\infty)=\int_{-\infty}^{x}  \int_{-\infty}^{+\infty}f(u,y)  \,\mathrm{d} y \,\mathrm{d}u$.和$P(Y \leqslant y)=F(+\infty,y)=\int_{-\infty}^{y} \int_{-\infty}^{+\infty}f(x,v)  \,\mathrm{d} x \,\mathrm{d}v $,边缘概率密度为$f_X(x)=F_X'(x)=\int_{-\infty}^{+\infty} f(x,y) \,\mathrm{d}y ,f_Y(y)=F_Y'(y)=\int_{-\infty}^{+\infty} f(x,y) \,\mathrm{d}x $
+
+二维随机变量$(X,Y)$落在某一平面的概率,就是对他在该平面的概率密度函数求积分.这与求分布函数不同,分布函数是从负无穷开始积分.
+
+二维分布函数的性质：
+\begin{enumerate}
+    \item $0 \leqslant F(x,y) \leqslant 1$
+    \item $F(-\infty,y)=F(x,-\infty)=F(-\infty,-\infty)=0$
+    \item $F(+\infty,+\infty)=1$
+    \item $F(x,y)$单调不减
+    \item $F(x,y)$右连续
+    \item $P(a<X<b,c<Y<d)=F(a,c)+F(b,d)-F(b,c)-F(a,d)$
+\end{enumerate}
+
+二维正态分布的概率密度函数
+\begin{gather*}
+	f(x, y) =\frac{1}{2 \pi \sigma_{1} \sigma_{2} \sqrt{1-\rho^{2}}} \exp \bigg\{-\frac{1}{2\left(1-\rho^{2}\right)}
+	\bigg[\frac{\left(x-\mu_{1}\right)^{2}}{\sigma_{1}^{2}}	\\
+	-2 \rho \frac{\left(x-\mu_{1}\right)\left(y-\mu_{2}\right)}{\sigma_{1} \sigma_{2}}+\frac{\left(y-\mu_{2}\right)^{2}}{\sigma_{2}^{2}}
+	\bigg] \bigg\}
+\end{gather*}
+记为$N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$.
+
+若二维正态分布$(X,Y) \sim N(\mu_1,\mu_2,\sigma_1^2,\sigma_2^2,\rho)$,则有如下性质：
+\begin{enumerate}
+    \item $X\sim N(\mu_1,\sigma_1^2),Y\sim N(\mu_2,\sigma_2^2)$
+    \item 两个服从正态分布的随机变量,线性组合仍服从正态分布,当他们不相互独立时有：$aX+bY\sim N(a\mu_1+b\mu_2,a^2\sigma_1^2+2ab\sigma_1\sigma_2\rho+b^2\sigma_2^2)$,他们的期望和方差可以单独计算：$E(X+Y)=EX+EY,D(X+Y)=DX+DX+2Cov(X,Y)$.
+    \item $\rho$是$X,Y$的相关系数,即$\rho =\frac{Cov(X,Y)}{\sqrt{DX}\sqrt{DY}}$
+    \item 二维正态分布的随机变量$X,Y$相互独立的充分必要条件是$\rho=0$,即$XY$不相关.
+    \item 若$\begin{vmatrix}
+    a   &   b   \\
+    c   &   d   \\
+    \end{vmatrix} \neq 0,$,则$(aX+bY,cX+dY)$也一定为二维正态.
+\end{enumerate}
+
+\begin{ttheorem}
+    若$X_1,X_2,\dots,X_n$相互独立且分别服从$N(u_i,\sigma_i^2),i=1,2,\dots,n$,则：
+\begin{equation*}
+    a_1X_1+a_2X_2+\dots+a_nX_n \sim N \left[\sum_{i=1}^{n} a_i\mu_i,\sum_{i=1}^{n} a_i^2\sigma_i^2\right] 
+\end{equation*}
+\end{ttheorem}
+
+\begin{definition}
+    设$X_1,X_2,\dots,X_n$为$n$个随机变量,若对于任意的$x_1,x_2,\dots,x_n$,成立
+    \begin{equation*}
+        P(X_1 \leqslant x_1,X_2 \leqslant x_2,\dots,X_n \leqslant x_n)=P(X_1 \leqslant x_1)P(X_2 \leqslant x_2)\dots P(X_n \leqslant x_n)
+    \end{equation*}
+    则称$X_1,X_2,\dots,X_n$是相互独立的.
+\end{definition}
+
+所以对于离散型随机变量$P(X_1 = x_1,X_2 = x_2,\dots,X_n = x_n)=P(X_1 = x_1)P(X_2 = x_2)\dots P(X_n = x_n)$.
+
+对于连续型随机变量$P(X_1 = x_1,X_2 = x_2,\dots,X_n = x_n)=f_{X_1}(x_1)f_{X_2}(x_2)\dots f_{X_n}(x_n)$.判断连续型随机变量的独立性只要计算求出边缘概率密度函数,然后判断$f(x,y)=f(x)f(y)$是否成立即可.
+
+\begin{ttheorem}
+    若二维随机变量$(X,Y)$相互独立,则
+    \begin{gather*}
+        f(x,y)=f(x)f(y)\\
+        F(x,y)=F(x)F(y)
+    \end{gather*}
+\end{ttheorem}
+
+\begin{definition}
+    设$(X,Y)$是二维连续型随机变量,对于固定的$y$,若$f_Y(y)>0$,则称
+    \begin{equation*}
+        f_{X\vert Y}(x\vert y)=\frac{f(x,y)}{f_Y(y)}
+    \end{equation*}
+    为在$Y=y$条件下$X$的条件概率密度.
+\end{definition}
+
+随机变量的独立性和条件概率密度要结合事件的运算加深理解.若$X,Y$相互独立,则$P(X=x_i,Y=y_i)=P(Y=y_i)P(X=x_i\vert Y=y_i)=P(Y=y_i)P(X=x_i)$.
+
+\subsubsection{二维随机变量函数的分布}
+求二维随机变量函数的分布有两种方法,对于简单的函数$Z=X+Y$可以采用卷积公式,这个方法要求随机变量$X,Y$相互独立.对于更复杂的函数而言采用的方法,与求二维随机变量落在某一平面的概率相类似,先求他的分布函数$F_Z(z)=P(Z \leqslant z)$,求导后就得到了二维随机变量函数的概率密度函数$f_Z(z)=[F_Z(z)]'$.
+
+由于$f_Z(z) \geqslant 0$,使用分布函数法要讨论$Z(X,Y)$所组成的平面区域和概率密度函数$f(x,y)$非零的区域之间的情况.而使用连续卷积公式同样要讨论$f_X(x)f_Y(z-x)>0$的情况.
+\begin{ttheorem}[(连续卷积公式)]
+    设$X,Y$是两个相互独立的连续型随机变量,他们的概率密度分别为$f_X(x)$和$f_Y(y)$,则$Z=X+Y$的概率密度为
+    \begin{equation*}
+        f_Z(z)=\int_{-\infty}^{+\infty} f_X(x)f_Y(z-x) \,\mathrm{d}x ,
+    \end{equation*}
+    或
+    \begin{equation*}
+        f_Z(z)=\int_{-\infty}^{+\infty} f_X(z-y)f_Y(y) \,\mathrm{d}y ,
+    \end{equation*}
+\end{ttheorem}
+
+\begin{ttheorem}[(离散卷积公式)]
+    设$X,Y$是两个相互独立的连续型随机变量,他们的概率密度分别为$P(X=x_i)$和$P(y=y_j)$,则$Z=X+Y$的概率密度为
+    \begin{equation*}
+        P(Z=z_k)=\sum_i P(X=x_i)P(Y=z_k-x_i)
+    \end{equation*}
+\end{ttheorem}
+
+\subsubsection{极值分布}
+
+设随机变量$X_1,X_2,\dotsc,X_n$相互独立,分布函数分别为$F_i(x),i=1,2,\dotsc,n$.
+
+最大值$X^*_n=\max\{X_1,X_2,\dotsc,X_n\} $的分布函数为
+\begin{equation*}
+    P(x^*_n \leqslant x)= \prod _{i=1}^{n}F_i(x)
+\end{equation*}
+如果是独立同分布,则有$F_{X_n^*}(x)=[F(x)]^n$
+
+最小值$X_1^*=\min\{X_1,X_2,\dotsc,X_n\}$的分布函数为
+\begin{equation*}
+    P(x_1^* \leqslant x)=1-\prod_{i=1}^{n}\left[1-F_i(x)\right] 
+\end{equation*}
+如果是独立同分布,则有$F_{X_1^*}(x)=1-[1-F(x)]^n$.
+\subsection{随机变量的数字特征}
+\subsubsection{离散型随机变量的数字特征} 
+\begin{definition}
+    设离散型随机变量$X$的分布律为$P(X=x_i)=p_i,i=1,2,\dots,n.$若$\sum^\infty_{i=1}\left\lvert x_i \right\rvert p_i<+\infty,$则称
+
+    \[
+    EX=\sum^\infty_{i=1}x_ip_i
+    \]
+    为随机变量$X$的算术数学期望,简称期望或均值.
+\end{definition}
+
+    若离散型随机变量$X$的分布律为$P(X=x_i)=p_i(i=1,2,3,\dots)$,$g(X)$是$X$的某一函数,则$g(X)$的数学期望\[
+        E[g(X)]=\sum^{}_{i}g(x_i)p_i\]
+
+    若离散型随机向量$(X,Y)$的联合分布律为$P(X=x_i,Y=y_i)=p_ij,i,j=1,2,3\dots$,$Z=g(X,Y)$是$X,Y$二元函数,则有\[
+        EZ=E[g(X,Y)]=\sum^{}_{i}\sum^{}_{j}g(x_i,y_i)p_{ij}\]
+        如果要算$EX$,$EY$不必求出边缘密度函数,可用下式\[
+        EX=\sum^{}_{i}\sum^{}_{j}x_ip_{ij}\]
+
+\begin{definition}
+    设$X$为随机变量,若$E(X-EX)^2$存在,则称$E(X-EX)^2$为$X$的方差,记为$DX$或$VarX$,即\[DX=E\left[(X-EX)^2\right] \]称方差$DX$的算数根$\sqrt{DX}$为$X$的标准差或均方差,记作$\sigma_X$或简记为$\sigma$.
+\end{definition}
+
+若$X$是离散型随机变量,分布律为$P(X=x_i)=p_i(i=1,2,3\dots)$,则\[DX=\sum^{}_{i}(x_i-EX)^2p_i\]
+\subsubsection{连续型随机变量的数字特征} 
+\begin{definition}
+    设连续型随机变量$X$的密度函数为$f(x)$,若$\int_{-\infty}^{+\infty}\left\lvert x \right\rvert f(x)  \,\mathrm{d} x<+\infty$ 则称
+    \[
+    EX=\int_{-\infty}^{+\infty}xf(x)  \,\mathrm{d} x 
+    \]为随机变量X的算术数学期望,简称期望或均值.
+\end{definition}
+
+    若连续型随机变量$X$的概率密度函数为$f(x)$,$g(X)$是$X$的某一函数,则$g(X)$的数学期望\[
+    E[g(X)]=\int_{-\infty}^{+\infty}g(x)f(x)  \,\mathrm{d} x \]
+    若连续型随机变量的联合概率密度函数为$f(x,y)$,则\[
+        EZ=E[g(X,Y)]=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}g(x,y)f(x,y)  \,\mathrm{d} x\,\mathrm{d} y\]如果要算$EX$,$EY$不必求出边缘密度函数,可用下式\[
+        EX=\int_{-\infty}^{+\infty}\int_{-\infty}^{+\infty}xf(x,y)  \,\mathrm{d} x\,\mathrm{d} y\]
+
+    若$X$是连续型随机变量,密度函数为$f(x)$,则\[DX=\int_{-\infty}^{-\infty}(x-EX)^2f(x)  \,\mathrm{d} x \]
+
+\subsubsection{随机变量数字特征的联系}
+
+方差的计算常用以下公式
+\begin{equation*}
+    DX=EX^2-(EX)^2
+\end{equation*}
+这个公式同时给出了计算$EX^2$的方法.如果已知了随机变量的期望与方差,要求$EX^2$,只要计算$DX+(EX)^2$.
+
+\begin{examp}{$X\sim N(\mu,\sigma^2)$,求$EX^2$.}
+
+    \jie $EX^2=DX+(EX)^2=\sigma^2+\mu^2$
+\end{examp}
+
+\begin{definition}
+    设$(X,Y)$为二维随机向量,若$E[(X-EX)(Y-EY)]$存在,则称此期望为$X,Y$的协方差,记为$Cov(X,Y)$,即\[
+    Cov(X,Y)=E[(X-EX)(Y-EY)]=E(XY)-EXEY.
+    \]
+\end{definition}
+\begin{definition}
+    设$(X,Y)$为二维随机向量,且$X,Y$的方差$\sigma_X\sigma_Y$均为正,则称$\dfrac{Cov(X,Y)}{\sigma_X\sigma_Y}$为$X$与$Y$的相关系数,记为$\rho _{XY}$或简记为$\rho $,即\[
+    \rho _{XY}=\frac{Cov(X,Y)}{\sigma_X\sigma_Y}=\frac{E[(X-\mu_X)(Y-\mu_Y)]}{\sigma_X\sigma_Y}.
+    \]    
+\end{definition}
+期望的性质
+    \begin{enumerate}
+        \item 设$c$为常数,$Ec=c$.
+        \item $E(cX)=cE(X)$.
+        \item $E(X+Y)=EX+EY$.
+        \item 设$X,Y$相互独立,则有$E(XY)=EXEY$.
+    \end{enumerate}
+
+方差的性质
+    \begin{enumerate}
+        \item 设$c$为常数,$Dc=0$.
+        \item $DX \geqslant 0$
+        \item $D(cX)=c^2D(X)$.
+        \item $D(X+c)=DX$
+        \item 设$X,Y$是两个随机变量,则\[D(X\pm Y)=DX+DY\pm 2Cov(X,Y).\]特别地,若$X,Y$相互独立,则有$D(X\pm Y)=DX+DY$.
+    \end{enumerate}
+
+协方差计算公式
+\begin{enumerate}
+\item $Cov(X,X)=DX.$
+\item $Cov(X,Y)=Cov(Y,X).$
+\item $Cov(aX,bY)=abCov(X,Y)$,$ab$为任意常数.
+\item $Cov(a,X)=0$,$ab$为任意常数.
+\item $Cov(X_1+X_2,Y)=Cov(X_1,Y)+Cov(X_2,Y).$
+\end{enumerate}
+
+设随机变量$X,Y$的相关系数为$\rho_{XY}$,则$\left\lvert \rho_{XY}\right\rvert \leqslant 1$
+\begin{ttheorem}[（独立性与不相关性）]
+    若方差均大于零的随机变量$X,Y$相互独立,则必不相关.但$X,Y$不相关不一定相互独立.
+\end{ttheorem}
+\begin{align*}
+    XY\text{不相关}\iff &Cov(X,Y)=0\\
+    \iff &\rho_{XY}=0\\
+    \iff &E(XY)=EXEY\\
+    \iff &D(X\pm Y)=DX+DY\\
+\end{align*}
+\begin{ttheorem}[（Markov不等式）]
+    设$X$是一个非负的随机变量且期望存在,则对任意$a>0$,有\[
+    P(X\geqslant  a)\leqslant \frac{EX}{a}.\]
+\end{ttheorem}
+\begin{ttheorem}[（Chebyshev不等式）]
+    设随机变量$X$的期望和方差都存在,则对任意常数$\varepsilon >0$,有\[
+    P(\left\lvert X-EX \right\rvert \geqslant \varepsilon )\leqslant  \frac{DX}{\varepsilon ^2}.\]或\[
+    P(\left\lvert X-EX \right\rvert < \varepsilon )\geqslant 1-  \frac{DX}{\varepsilon ^2}.\]
+\end{ttheorem}
+\begin{ttheorem}[（Cauchy-Schwarz不等式）]
+    设$XY$是任意两个随机变量,若$X,Y$的方差都存在,则有\[
+    [E(X,Y)]^2\leqslant EX^2EY^2\]
+\end{ttheorem}
+\subsection{大数定律和中心极限定理}
+\begin{theorem}[Bernoulli大数定律]
+    设$\mu_n$为$n$重Bernoulli实验中事件$A$发生的次数,$p$为每次实验中$A$发生的概率,则对任意的$\varepsilon >0$,有\[
+    \lim_{n \to \infty}P(\left\lvert \frac{\mu_n}{n}-p \right\rvert< \varepsilon )=1  \]
+\end{theorem}
+该定理说明了当$n$足够大时,频率等于概率.
+
+\begin{definition}
+    设$Y_1,Y_2,\dots,Y_n,\dots$为随机变量序列,$a$为常数,如果对任意的$\varepsilon >0$,有\[
+     \lim_{n \to \infty}P(\left\lvert Y_n-a \right\rvert< \varepsilon )=1 \]则称${{Y_n}}$依概率收敛于$a$,记作$Y_n\xrightarrow[]{P} a$
+\end{definition}
+\begin{theorem}[Chebyshev大数定律]
+    设$X_1,X_2,\dots,X_n,\dots$是两两不相关的随机变量序列,且方差都是一致有界的,即存在某一常数$C$,使得$DX_i<C(i=1,2,\dots)$,则对任意$\varepsilon >0$,都有
+\begin{equation*}
+    \label{chebyshev}
+        \lim_{n \to \infty}P\left(\left\lvert \frac{1}{n}\sum^{n}_{i=1}X_i-\frac{1}{n}\sum^{n}_{i=1}EX_i \right\rvert< \varepsilon \right)=1
+\end{equation*}
+\end{theorem}
+\begin{theorem}[Markov大数定律]
+    若随机变量序列$X_1,X_2,\dots,X_n,\dots$满足条件\[\lim_{n \to \infty}\frac{1}{n^2}D\left(\sum^{n}_{i=1}X_i\right)=0\],则该序列服从大数定律,即对任意$\varepsilon >0$,\eqref{chebyshev}成立.
+\end{theorem}
+\begin{theorem}[Khinchin大数定律]
+    设$X_1,X_2,\dots,X_n,\dots$是相互独立且同分布的随机变量序列,$EX_i=\mu,i=1,2,\dots,$则序列$X_1,X_2,\dots,X_n,\dots$服从大数定律,即对任意$\varepsilon >0$,有
+\begin{equation*}
+        \lim_{n \to \infty}P\left(\left\lvert \frac{1}{n}\sum^{n}_{i=1}X_i-\mu \right\rvert< \varepsilon \right)=1
+\end{equation*}
+\end{theorem}
+该定理说明了当$n$足够大时,均值等于期望.
+
+\begin{theorem}[Lindeberg-Levy中心极限定理]
+    设$X_1,X_2,\dots,X_n,\dots$是相互独立且同分布的随机变量序列,$EX_i=\mu,DX_i=\sigma^2(0<\sigma^2<+\infty),i=1,2,\dots,$则对任意的$x\in \mathbb{R}$ ,有
+\begin{equation*}
+        \lim_{n \to \infty}P\left(\frac{\sum\limits^{n}_{i=1}X_i-n\mu}{\sqrt{n}\sigma} \leqslant x \right)=\int_{-\infty}^{x}\frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}  \,\mathrm{d} t =\varPhi (x)
+\end{equation*}
+\end{theorem}
+\begin{theorem}[De Moivre-Laplace中心极限定理]
+    设$\mu_n$为$n$重Bernoulli实验中事件$A$发生的次数,$p$为每次实验中$A$发生的概率,则对任意的$x\in \mathbb{R}$,有
+\begin{equation*}
+        \lim_{n \to \infty}P\left(\frac{\mu_n-np}{\sqrt{np(1-p)}}\leqslant x \right)=\int_{-\infty}^{x}\frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}  \,\mathrm{d} t =\varPhi (x)
+\end{equation*}
+\end{theorem}
+\subsection{统计估计方法}
+\subsubsection{总体}
+\begin{enumerate}
+    \item 设$X$是随机变量,把$E(X^k),k=1,2,\dots$称为$X$的$k$阶原点矩.
+    \item 设$X$是随机变量,把$E\left[(X-EX)^k\right] ,k=1,2,\dots$称为$X$的$k$阶中心矩.
+\end{enumerate}
+\subsubsection{样本}
+设$X_1,X_2,\dotsc,X_n$为取自某总体$X$的样本,定义样本均值为
+\begin{equation*}
+\bar{X}=\frac{1}{n}\sum_{i=1}^{n}X_i.
+\end{equation*}
+样本方差为
+\begin{equation*}
+    S^2=\frac{1}{n-1}\sum^{n}_{i=1}(X_i-\bar{X})^2
+\end{equation*}
+样本标准差为
+\begin{equation*}
+    S=\sqrt{S^2}=\sqrt{\frac{1}{n-1}\sum^{n}_{1}(X_i-\bar{X})^2}
+\end{equation*}
+样本的k阶原点矩为
+\begin{equation*}
+A_k=\frac{1}{n}\sum^{n}_{i=1}X_i^k,k=1,2,\dots
+\end{equation*}
+样本的k阶中心矩为
+\begin{equation*}
+B_k=\frac{1}{n}\sum^{n}_{i=1}(X_i-\bar{X})^k,k=1,2,\dots
+\end{equation*}
+当$k=2$时,习惯上将$B_2$记为$S_n^2$.满足$B_2=A_2-\bar{X}^2$,即$\frac{1}{n}\sum^{n}_{i=1}(X_i-\bar{X})^2=\frac{1}{n}\sum^{n}_{i=1}X_i^2-\bar{X}^2$.
+\begin{prf}[$\frac{1}{n}\sum^{n}_{i=1}(X_i-\bar{X})^2=\frac{1}{n}\sum^{n}_{i=1}X_i^2-\bar{X}^2$]
+\begin{align*}
+    \frac{1}{n}\sum^{n}_{i=1}(X_i-\bar{X})^2&=\frac{1}{n}\sum^{n}_{i=1}(X_i^2-2X_i\bar{X}+\bar{X}^2) \\
+    &=\frac{1}{n}\sum^{n}_{i=1}X_i^2-\frac{2\bar{X}}{n}\sum^{n}_{i=1}X_i+\frac{1}{n}\sum^{n}_{i=1}\bar{X}^2=\frac{1}{n}\sum^{n}_{i=1}X_i^2-2\bar{X}^2+\bar{X}^2 \\
+    &=\frac{1}{n}\sum^{n}_{i=1}X_i^2-\bar{X}^2.
+\end{align*}
+\end{prf}
+\begin{prf}[$\sum^{n}_{i=1}(x_i-\bar{x})^2=\sum^{n}_{i=1}x_i(x_i-\bar{x})$]
+    \begin{align*}
+    \sum^{n}_{i=1}(x_i-\bar{x})^2&=\sum^{n}_{i=1}(x^2_i-2x_i\bar{x}+\bar{x}^2) \\
+    &=\sum^{n}_{i=1}x^2_i-2\bar{x}\sum^{n}_{i=1}x_i+n\bar{x}^2=\sum^{n}_{i=1}x^2_i-n\bar{x}^2 =\sum^{n}_{i=1}x_i^2-\bar{x}\sum^{n}_{i=1}x_i\\
+    &=\sum^{n}_{i=1}x_i(x_i-\bar{x}).
+    \end{align*}
+\end{prf}
+\begin{prf}[$\sum^{n}_{i=1}(x_i-\bar{x})(y_i-\bar{y})=\sum^{n}_{i=1}x_i(y_i-\bar{y})$]
+    \begin{align*}
+    \sum^{n}_{i=1}(x_i-\bar{x})(y_i-\bar{y})&=\sum^{n}_{i=1}(x_iy_i-\bar{y}x_i-\bar{x}y_i+\bar{x}\bar{y}) \\
+    &=\sum^{n}_{i=1}x_iy_i-\bar{y}\sum^{n}_{i=1}x_i-\bar{x}\sum^{n}_{i=1}y_i+n\bar{x}\bar{y}=\sum^{n}_{i=1}x_iy_i-n\bar{x}\bar{y} \\
+    &=\sum^{n}_{i=1}x_i(y_i-\bar{y}).
+    \end{align*}
+\end{prf}
+\begin{prf}[$\sum^{n}_{i=1}(X_i-\bar{X})^2=\sum^{n}_{i=1}(X_i-\mu)^2-n(\bar{X}-\mu)^2$]
+
+\end{prf}
+\subsubsection{抽样分布}
+抽样的样本属于相互独立的随机变量,如果总体的期望和方差分别为$EX=\mu,DX=\sigma^2$,那么样本均值$\bar{X}$和样本方差$S^2$是相互独立的随机变量且满足以下特征：
+\begin{enumerate}
+    \item $E\bar{X}=\mu$
+    \item $D\bar{X}=\frac{\sigma^2}{n}$
+    \item $ES^2=DX=\sigma^2$
+\end{enumerate}
+
+\begin{definition}
+    设$X_1,X_2,\dotsc,X_n$独立同分布于标准正态分布$N(0,1)$,则$\chi^2=X_1^2+\dotsc+X_n^2$服从自由度为$n$的$\chi^2$分布,记为$\chi^2\sim\chi^2(n)$.
+\end{definition}
+卡方分布的性质：
+\begin{enumerate}
+    \item 设$\chi^2_1\sim \chi^2(n_1),\chi^2_2\sim \chi^2(n_2)$,并且$\chi^2_1,\chi^2_2$相互独立,则$\chi^2_1+\chi^2_2\sim \chi^2(n_1+n_2)$ 
+    \item 设$\chi^2\sim \chi^2(n)$则有$E(\chi^2)=n,D(\chi^2)=2n$
+\end{enumerate}
+\begin{definition}
+    设$X\sim N(0,1),Y\sim \chi^2(n)$,且$XY$相互独立,则称随机变量
+    \begin{equation*}
+        t=\frac{X}{\sqrt{Y/n}}
+    \end{equation*}
+    服从自由度为$n$的$t$分布,记为$t\sim t(n)$.
+\end{definition}
+
+$t_{1-\alpha}(n)=-t_\alpha(n)$.
+
+$t$分布的概率密度函数是偶函数.
+
+\begin{definition}
+    设$X\sim \chi^2(n_1),Y\sim \chi^2(n_2)$,且$XY$相互独立,则称随机变量
+    \begin{equation*}
+        F=\frac{X/n_1}{Y/n_2}
+    \end{equation*}
+    服从自由度为$(n_1,n_2)$的$F$分布,记为$F\sim F(n_1,n_2)$.
+\end{definition}
+$\frac{1}{F}\sim F(n_2,n_1)$
+
+设$X_1,X_2,\dotsc,X_n$是来自正态总体$N(\mu,\sigma^2)$的样本,$\bar{X},S^2$分别是样本均值和样本方差,则有
+\begin{enumerate}
+    \item \begin{equation*}
+    \bar {X}\sim N(\mu,\frac{\sigma^2}{n})  
+    \end{equation*}
+    \item \begin{equation*}
+    \frac{\bar{X}-\mu}{\sigma/\sqrt{n}} \sim N(0,1)
+    \end{equation*}
+    \item \begin{equation*}
+    \frac{1}{\sigma^2}\sum^{n}_{i=1}(X_i-\mu)^2\sim \chi^2(n)
+    \end{equation*}
+
+    对于该式,可以这样理解,由于$\dfrac{X_i-\mu}{\sigma}\sim N(0,1)$,故$\displaystyle \sum_{i=1}^{n} \left(\frac{X_i-\mu}{\sigma}\right) ^2=\frac{1}{\sigma^2}\sum^{n}_{i=1}(X_i-\mu)^2$是卡方分布的标准形式.
+    \item \begin{equation}
+        \dfrac{(n-1)S^2}{\sigma^2}\sim \chi^2(n-1);
+    \end{equation}
+
+    对于该式,可以这样理解,$\displaystyle S^2=\frac{1}{n-1}\sum_{i=1}^{n}(X_i-\bar{X})^2,\frac{(n-1)S^2}{\sigma^2}=\sum_{i=1}^{n}\frac{(X_i-\bar{X})^2}{\sigma^2}$
+    \item \begin{equation*}
+        \frac{\bar{X}-\mu}{S/\sqrt{n}}\sim t(n-1)
+    \end{equation*}
+    对于该式不是硬背下来的,而是构造出来的,考虑t分布的构造方法,易得
+    \begin{equation}
+        \frac{\dfrac{\bar{X}-\mu}{\sigma/\sqrt{n}} }{\sqrt{\dfrac{(n-1)S^2}{\sigma^2}/(n-1)}}=\frac{\sqrt{n}}{S}(\bar{X}-\mu)\sim t(n-1)
+    \end{equation}
+\end{enumerate}
+
+\subsubsection{参数估计}
+矩估计的原理是当样本数量无穷大时,由Khinchin大数定律,样本矩等于总体矩$EX^k=\frac{1}{n}\sum_{i=1}^nX_i^k$.所以总体有$k$个参数,就可以列出$k$个方程,计算总体和样本的$1\sim k$阶矩.
+
+由于矩估计既可以采用原点矩,又可以采用中心矩,故具体操作时使用更简单的原点矩即可.
+
+\subsubsection{区间估计}
+设已给定置信水平为$1-\alpha$,$X_1,X_2,\dotsc,X_n$是来自正态总体$N(\mu,\sigma^2)$的样本,$\bar{X},S^2$分别是样本均值和样本方差,则当$\sigma^2$已知时,$\mu$的置信区间为
+    \begin{equation*}
+        \left(\bar{X}\pm \frac{\sigma}{\sqrt{n}}z_{\frac{\alpha}{2}}\right) 
+    \end{equation*}
+当$\sigma^2$未知时,$\mu$的置信区间为
+    \begin{equation*}
+        \left(\bar{X}\pm \frac{S}{\sqrt{n}}t_{\frac{\alpha}{2}}(n-1)\right)
+    \end{equation*}
+当$\mu$未知时,$\sigma^2$的置信区间为
+    \begin{equation*}
+        \left(\frac{(n-1)S^2}{\chi^2_{\frac{\alpha}{2}}(n-1)},\frac{(n-1)S^2}{\chi^2_{1-\frac{\alpha}{2}}(n-1)}\right) 
+    \end{equation*}
+\subsubsection{假设检验}
+假设检验的拒绝域：
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}  
+\begin{table}[]
+    \begin{tabular}{ccccc}
+    原假设 $H_0$& 备择假设 $H_1$& 其他参数 & 检验统计量 & 拒绝域 \\
+     $\mu=\mu_0$ & $\mu\neq \mu_0$ & \multirow{3}{*}{$\sigma^2$已知} & \multirow{3}{*}{$Z=\frac{\bar{X}-\mu_0}{\sigma/\sqrt{n}}$} & $\left\lvert Z\right\rvert \geqslant z_{\frac{\alpha}{2}}$ \\
+     $\mu\leqslant \mu_0$ & $\mu>\mu_0$ &  &  & $Z\geqslant z_\alpha$ \\
+     $\mu\geqslant \mu_0$ & $\mu<\mu_0$ &  &       & $Z\leqslant  -z_\alpha$ \\
+     $\mu=\mu_0$ & $\mu\neq \mu_0$ & \multirow{3}{*}{$\sigma^2$未知} & \multirow{3}{*}{$t=\frac{\bar{X}-\mu_0}{S/\sqrt{n}}$} & $\left\lvert t\right\rvert \geqslant t_{\frac{\alpha}{2}}(n-1)$ \\
+     $\mu\leqslant \mu_0$ & $\mu>\mu_0$ &  &  & $t\geqslant t_\alpha(n-1)$ \\
+     $\mu\geqslant \mu_0$ & $\mu<\mu_0$ &  &       & $t\leqslant -t_\alpha(n-1)$ \\
+     $\sigma^2=\sigma_0^2$ & $\sigma^2\neq \sigma_0^2$ & \multirow{3}{*}{$\mu$未知} & \multirow{3}{*}{$\chi^2=\frac{(n-1)S^2}{\sigma^2}$} & \tabincell{c}{$\chi^2\leqslant \chi^2_{1-\frac{\alpha}{2}}(n-1)$或\\$\chi^2\geqslant \chi^2_{\frac{\alpha}{2}}(n-1)$ }\\
+     $\sigma^2\leqslant \sigma_0^2$ & $\sigma^2> \sigma_0^2$ &      &       & $\chi^2\geqslant  \chi^2_{\alpha}(n-1)$ \\
+     $\sigma^2\geqslant \sigma_0^2$ & $\sigma^2< \sigma_0^2$ &      &       & $\chi^2\leqslant \chi^2_{1-\alpha}(n-1)$ 
+    \end{tabular}
+\end{table}
+
+\clearpage
+\section{附录}
+每天起床头件事,先背一遍展开式：
+\begin{align*}
+    \mathrm{e}^x&=\sum^{\infty}_{n=0}\phantom{\frac{1}{n!}x^n}=\phantom{1+x+\frac{x^2}{2!}+\frac{x^3}{3!}+\dots},-\infty<x<\infty,\\
+    \sin x&=\sum^{\infty}_{n=0}\phantom{\frac{(-1)^n}{(2n+1)!}x^{2n+1}}=\phantom{x-\frac{x^3}{3!}+\frac{x^5}{5!}-\frac{x^7}{7!}+\dots},-\infty<x<\infty,\\
+    \cos x&=\sum^{\infty}_{n=0}\phantom{\frac{(-1)^n}{(2n)!}x^{2n}}=\phantom{1-\frac{x^2}{2!}+\frac{x^4}{4!}-\frac{x^6}{6!}+\dots},-\infty<x<\infty,\\
+    \ln(x+1)&=\sum^{\infty}_{n=1}\phantom{\frac{(-1)^{n-1}}{n}x^n}=\phantom{x-\frac{x^2}{2}+\frac{x^3}{3}-\frac{x^4}{4}+\dots},-1<x\leqslant 1,\\
+    (1+x)^\alpha&=\sum^{\infty}_{n=0}\phantom{\mathbf{C} _\alpha^nx^n}=\phantom{1+\alpha x+\frac{\alpha(\alpha-1)}{2!}x^2+}\\
+    &\phantom{\phantom{=\sum^{\infty}_{n=0}\mathbf{C} _\alpha^nx^n=}\dots+\frac{\alpha(\alpha-1)\dots(\alpha-n+1)}{n!}x^n},-1<x<1,\\
+    \frac{1}{1-x}&=\sum^{\infty}_{n=0}\phantom{x^n}=\phantom{1+x+x^2+x^3\dots},-1<x<1.\\
+    \arcsin x &= \phantom{x +\frac{x^3}{3!}+o(x^3) }\\
+    \arctan x &= \phantom{x -\frac{x^3}{3}+o(x^3)} \\
+    \tan x &= \phantom{x+\frac{x^3}{3}+o(x^3)}
+\end{align*}
+
+重要积分公式：
+\begin{align*}
+    \int\sec x\,\mathrm{d}x &=\phantom{\ln \left\lvert \sec x+\tan x\right\rvert +C}&
+    \int\csc x\,\mathrm{d}x &=\phantom{\ln \left\lvert \csc x-\cot x\right\rvert +C}\\
+    \int\tan x\,\mathrm{d}x &=\phantom{-\ln \left\lvert \cos x\right\rvert +C}&
+    \int\cot x\,\mathrm{d}x &=\phantom{\ln \left\lvert \sin x\right\rvert +C}\\
+    \int\frac{1}{\sqrt{x^2-a^2}}\,\mathrm{d}x &=\phantom{\ln \left\lvert x+\sqrt{x^2-a^2}\right\rvert +C}&
+    \int\frac{1}{\sqrt{x^2+a^2}}  \,\mathrm{d}x&=\phantom{\ln \left\lvert x+\sqrt{x^2+a^2}\right\rvert \,\mathrm{d}x} \\
+    \int \frac{1}{x^2-a^2} \,\mathrm{d}x &=\phantom{\frac{1}{2a}\ln \left\lvert \frac{x-a}{x+a}\right\rvert +C}
+\end{align*}
+
+
+曲线$r=r(\theta)$与射线$\theta=\alpha,\theta=\beta$围成的面积：
+\begin{equation*}
+    \phantom{\frac{1}{2}\int_{\alpha}^{\beta} r^2(\theta) \,\mathrm{d}\theta }
+\end{equation*}
+
+曲线$r=r_1(\theta),r=r_2(\theta)$与射线$\theta=\alpha,\theta=\beta$围成的面积：
+\begin{equation*}
+    \phantom{\frac{1}{2}\int_{\alpha}^{\beta} \left\lvert r_1^2(\theta)-r_2^2(\theta)\right\rvert \,\mathrm{d}\theta }
+\end{equation*}
+
+旋转体的体积:
+
+连续曲线$y=f(x)$以及$x=a,x=b$和$x$轴绕$x$轴旋转而成的旋转体的体积为
+\begin{equation*}
+    \phantom{V_x=\pi \int_{a}^{b} f^2(x) \,\mathrm{d}x .}
+\end{equation*}
+连续曲线$x=\varphi (y)$以及$y=c,y=d$和$y$轴绕$y$轴旋转而成的旋转体的体积为
+\begin{equation*}
+    \phantom{V_y=\pi \int_{c}^{d} \varphi ^2(y) \,\mathrm{d}y .}
+\end{equation*}
+当$0\leqslant a<x<b$时也可以写成
+\begin{equation*}
+    \phantom{V_y=2\pi \int_{a}^{b} x\left\lvert f(x)\right\rvert  \,\mathrm{d}x .}
+\end{equation*}
+
+一阶线性齐次微分方程$\frac{\mathrm{d} y}{\mathrm{d} x} + P(x)y = 0 $的通解为：
+\begin{equation*}
+    \phantom{y=C\cdot \mathrm{e}^{-\int P(x) \,\mathrm{d}x }.}
+\end{equation*}
+
+一阶线性非齐次微分方程的通解为：
+\begin{equation*}
+    \phantom{y=\mathrm{e}^{-\int P(x) \,\mathrm{d}x }\left( \int Q(x)\mathrm{e}^{\int P(x) \,\mathrm{d}x } \,\mathrm{d}x +C \right).}
+\end{equation*}
+
+\begin{table}[]
+    \caption{二阶常系数齐次线性微分方程通解}
+    \label{qicifc}
+    \centering
+    \begin{tabular}{@{}cc@{}}
+    \toprule
+    $r^2+ar+b=0$的两个根的情况         & $y''+ay'+by=0$的通解                                 \\ \midrule
+    两个不相等的实根$r_1,r_2$           & $\phantom{y=C_1e^{r_1x}+C_2e^{r_2x}}$                       \\
+    两个相等的实根$r_1=r_2=r$          & $\phantom{y=(C_1+C_2x)e^{rx}}$                              \\
+    一对共轭复根$r_{1,2}=\alpha\pm \mathrm{i}\beta$ & $\phantom{y=e^{\alpha x}(C_1\cos \beta x+C_2\sin \beta x)}$ \\ \bottomrule
+    \end{tabular}
+\end{table}
+
+$P(\left\lvert X-EX \right\rvert \geqslant \varepsilon )\leqslant \phantom{\frac{DX}{\varepsilon ^2}}$
